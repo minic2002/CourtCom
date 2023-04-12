@@ -1,0 +1,36 @@
+body {
+	background-image: url("/CourtCom/static/images/index.jpg");
+	background-size: cover;
+	font-family: Arial;
+	font-weight: bold;
+	font-size: 25px;
+}
+
+.logo {
+	width: 550px;
+	height: auto;
+}
+
+.logo-container {
+	display: flex;
+	align-items: center;
+}
+
+.navbar-nav .nav-link:hover {
+	/*background-color: #fcde67!important;*/
+	color: #fcde67!important;
+	/*border-radius: 25px;*/
+}
+
+.text-white, text-white:hover {
+	color: white!important;
+}
+
+.txt-shadow {
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.logo-desc {
+	top: 0;
+	margin-top: 80px;
+}

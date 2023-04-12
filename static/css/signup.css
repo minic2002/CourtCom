@@ -1,0 +1,87 @@
+body {
+	background-image: url("/CourtCom/static/images/signupbg.jpg");
+	background-size: cover;
+	font-family: Arial;
+}
+.bottom-right {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	margin-bottom: 10px;
+	margin-right: 20px;
+}
+.right {
+	right: 0;
+	margin-right: -30px;
+}
+.center-left {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin-top: 25px;
+	margin-left: 130px;
+}
+.login-word {
+	font-family: Arial;
+	font-style: Black;
+	font-size: 40px;
+}
+input[type="text"], input[type="password"], input[type="email"], input[type="number"], input[type="tel"], select {
+	border: none;
+	outline: none; 
+	border-radius: 25px;
+	padding:10px;
+	display:block;
+	width:100%;
+	font-size: 20px;
+	text-indent: 20px;
+}
+/*select {
+	border: none;
+	outline: none; 
+	border-radius: 25px;
+	padding:10px;
+	display:block;
+	width:100%;
+	font-size: 20px;
+	text-indent: 20px;
+}*/
+input::placeholder {
+	text-indent: 20px;
+	font-family: Arial;
+	font-size: 20px;
+}
+.other-words {
+	font-family: Arial;
+	font-style: italic;
+	font-size: 20px;
+	
+}
+.kuan {text-decoration:none}
+input[type="submit"], button {
+	background-color: #5BCCF6;
+	color: #fff;
+	padding: 10px 20px;
+	border: none;
+	border-radius: 25px;
+	cursor: pointer;
+	font-size: 20px;
+	width: 50%;
+}
+
+.password-container {
+	position: relative;
+}
+
+.password-container .lock-icon {
+	position: absolute;
+	top: 35%;
+	right: 10px;
+	transform: translateY(-50%);
+	cursor: pointer;
+}
+
+
+.skyan,.skyan:hover{color:#fff!important;background-color:#5BCCF6!important}
+.text-skyan,.text-skyan:hover{color:#5BCCF6!important;}
+.text-magic-ink,text-magic-ink:hover{color:#0047FF!important;}
