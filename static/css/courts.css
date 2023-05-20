@@ -1,0 +1,181 @@
+@font-face {
+  font-family: Inter;
+  src: url(../Inter/static/Inter-Regular.ttf);
+}
+
+body {
+	/*background-image: url("/CourtCom/static/images/index.jpg");
+	background-size: cover;
+  background-position: center;
+  background-attachment: fixed;*/
+	font-family: Inter;
+	font-weight: bold;
+	font-size: 25px;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+
+
+h2 {
+  font-family: Arial;
+  font-weight: bold;
+}
+
+h1, p {
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+
+/*CARD PART*/
+.court-card {
+  position: relative;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.court-card img {
+  border-radius: 10px;
+  object-fit: cover;
+  width: 300px;
+  height: 200px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.court-details {
+  position: absolute;
+  top: 0;
+  width: 300px; 
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+.court-card:hover .court-details {
+  opacity: 1;
+  left: 0;
+}
+
+
+.court-details h3,
+.court-details p {
+  margin: 0;
+  padding: 5px;
+}
+/*END OF CARD PART */
+
+/*
+.crop-img {
+  border-radius: 10px;
+  object-fit: cover;
+  width: 240px;
+  height: 135px;
+}
+*/
+
+.bg-container {
+  background-color: #fff;
+  height: 100%;
+  width: 100%;
+  background: -webkit-linear-gradient(60deg, #fcde67 100%, #5BCCF6 100%);
+  background: linear-gradient(60deg, #fcde67, #5BCCF6);
+  background-size: 100% 100%;
+}
+
+
+/* hidden scrollbar */
+
+/* For WebKit based browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 0.0em; /*Set a width for the scrollbar (optional) */
+}
+/* end hidden */
+
+.profile-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+}
+
+.profile-icon img {
+  object-fit: cover;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent black background */
+  z-index: 1; /* Set a high z-index to ensure it appears above other elements */
+  display: none; /* Hide the overlay by default */
+}
+
+
+.side-menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 250px;
+  background-color: #343a40;
+  color: #fff;
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 2;
+}
+
+.side-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.side-menu li{
+  margin-bottom: 10px;
+}
+
+.side-menu li a {
+  display: block;
+  padding: 10px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.side-menu li a:hover {
+  background-color: #f2f2f2;
+  color: #343a40;
+}
+
+.side-menu a:hover {
+  background-color: #f2f2f2;
+  color: #343a40;
+}
+
+.side-menu.active {
+  transform: translateX(0);
+}
+
+.side-menu.active + .overlay {
+	display: block;
+}

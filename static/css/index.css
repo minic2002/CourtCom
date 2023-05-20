@@ -1,6 +1,8 @@
 body {
 	background-image: url("/CourtCom/static/images/index.jpg");
 	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
 	font-family: Arial;
 	font-weight: bold;
 	font-size: 25px;
@@ -16,10 +18,13 @@ body {
 	align-items: center;
 }
 
-.navbar-nav .nav-link:hover {
-	/*background-color: #fcde67!important;*/
+.nav-link-hover:hover {
 	color: #fcde67!important;
-	/*border-radius: 25px;*/
+}
+
+.sign-up {
+	background-color: #fcde67!important;
+	border-radius: 30px;
 }
 
 .text-white, text-white:hover {

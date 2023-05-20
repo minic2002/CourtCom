@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple images</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/css/bootstrap.min.css">
+    <style>
+        .image-gallery {
+            display: flex;
+            overflow-x: scroll; /* enable horizontal scrolling */
+            scroll-behavior: smooth; /* add smooth scrolling animation */
+            scrollbar-width: none; /* hide scrollbar */
+            -ms-overflow-style: none; /* hide scrollbar (IE, Edge) */
+        }
+
+        /* hide scrollbar (Firefox) */
+        .image-gallery::-webkit-scrollbar {
+            display: none;
+        }
+
+        .image-gallery img {
+            width: 200px; /* set the width of the images */
+            margin-right: 10px; /* add some space between images */
+        }
+
+        .image-gallery img:active {
+            cursor: grabbing; /* change cursor to grabbing on desktop devices when dragging */
+        }
+    </style>
+</head>
+<body>
+    <div class="image-gallery" id="image-container">
+        <img src="static/images/court_images/Anuada Basketanan-66.jpg" alt="Image 1">
+        <img src="static/images/court_images/Basket Baron-63.jpg" alt="Image 2">
+        <img src="static/images/court_images/Folklore Badminton-62.jpg" alt="Image 3">
+        <img src="static/images/court_images/Janine DaGym-67.jpg" alt="Image 4">
+        <img src="static/images/court_images/Katy Kourt-65.jpg" alt="Image 5">
+        <img src="static/images/court_images/Mardon Table Tennis-68.jpg" alt="Image 6">
+        <img src="static/images/court_images/Queen Volleyballanan-73.jpg" alt="Image 7">
+        <img src="static/images/court_images/Waren Swim Training-71.jpg" alt="Image 8">
+    </div>
+
+    <div class="mt-2 text-center">
+        <button class="btn btn-secondary prev-btn">
+            <i class="bi bi-arrow-left"></i> Previous
+        </button>
+        <button class="btn btn-secondary next-btn">
+            Next <i class="bi bi-arrow-right"></i>
+        </button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.min.js"></script>
+    <script>
+        const imageContainer = document.getElementById('image-container');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+
+        prevBtn.addEventListener('click', () => {
+            imageContainer.scrollBy({
+                left: -300,
+                behavior: 'smooth'
+            });
+        });
+
+        nextBtn.addEventListener('click', () => {
+            imageContainer.scrollBy({
+                left: 300,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>

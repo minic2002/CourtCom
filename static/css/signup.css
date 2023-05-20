@@ -36,6 +36,17 @@ input[type="text"], input[type="password"], input[type="email"], input[type="num
 	font-size: 20px;
 	text-indent: 20px;
 }
+
+input[type="file"] {
+	outline: none; 
+	border-radius: 25px;
+	padding:10px;
+	display:block;
+	width:100%;
+	font-size: 20px;
+	text-indent: 20px;
+}
+
 /*select {
 	border: none;
 	outline: none; 
@@ -67,13 +78,14 @@ input[type="submit"], button {
 	cursor: pointer;
 	font-size: 20px;
 	width: 50%;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
 
 .password-container {
 	position: relative;
 }
 
-.password-container .lock-icon {
+.password-container .lock-icon{
 	position: absolute;
 	top: 35%;
 	right: 10px;

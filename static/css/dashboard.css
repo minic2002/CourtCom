@@ -1,21 +1,100 @@
+@font-face {
+  font-family: Inter;
+  src: url(../Inter/static/Inter-Regular.ttf);
+}
+
 body {
-	background-image: url("/CourtCom/static/images/index.jpg");
+	/*background-image: url("/CourtCom/static/images/index.jpg");
 	background-size: cover;
-  background-position: initial;
-	font-family: Arial;
+  background-position: center;
+  background-attachment: fixed;*/
+	font-family: Inter;
 	font-weight: bold;
 	font-size: 25px;
 }
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+}
+
+
+h2 {
+  font-family: Arial;
+  font-weight: bold;
+}
+
+h1, p {
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/*CARD PART*/
+.kard {
+  position: relative;
+  width: 18rem;
+  display:inline-block;
+}
+
+.card-img-overlay {
+  border-radius: 10px;
+  opacity: 0;
+  transition: opacity 0.5s;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.card-title {
+  color: #fff;
+  font-size: 24px;
+  text-align: center;
+}
+
+.kard:hover .card-img-overlay {
+  opacity: 1;
+}
+
+
+.crop-img {
+  /*border-radius: 10px;*/
+  object-fit: cover;
+  /*width: 290px;*/
+  height: 570px;
+}
+
+.bg-container {
+  background-color: #fff;
+  height: 100%;
+  width: 100%;
+  background: -webkit-linear-gradient(60deg, #fcde67 100%, #5BCCF6 100%);
+  background: linear-gradient(60deg, #fcde67, #5BCCF6);
+  background-size: 100% 100%;
+}
+
+
 /*
 .navbar-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px;
+  padding: 10px; 
   width: 100%;
   background-color: #5BCCF6;
   color: #000;
 }
+
 
 .navbar {
   display: flex;
@@ -39,6 +118,13 @@ body {
   cursor: pointer;
 }
 */
+
+
+
+
+
+/*END OF CARD PART */
+
 .profile-icon {
   display: flex;
   justify-content: center;
@@ -52,8 +138,9 @@ body {
 }
 
 .profile-icon img {
-  width: 30px;
-  height: 30px;
+  object-fit: cover;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
 }
 
@@ -74,8 +161,9 @@ body {
   top: 0;
   right: 0;
   bottom: 0;
-  width: 200px;
-  background-color: #fff;
+  width: 250px;
+  background-color: #343a40;
+  color: #fff;
   transform: translateX(100%);
   transition: transform 0.3s ease-in-out;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -87,19 +175,25 @@ body {
   padding: 0;
 }
 
-.side-menu li {
+.side-menu li{
   margin-bottom: 10px;
 }
 
 .side-menu li a {
   display: block;
   padding: 10px;
-  color: #333;
+  color: #fff;
   text-decoration: none;
 }
 
 .side-menu li a:hover {
   background-color: #f2f2f2;
+  color: #343a40;
+}
+
+.side-menu a:hover {
+  background-color: #f2f2f2;
+  color: #343a40;
 }
 
 .side-menu.active {
@@ -109,3 +203,11 @@ body {
 .side-menu.active + .overlay {
 	display: block;
 }
+
+/* hidden scrollbar */
+
+/* For WebKit based browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 0.0em; /*Set a width for the scrollbar (optional) */
+}
+/* end hidden */
