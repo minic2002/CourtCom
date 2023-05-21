@@ -44,13 +44,13 @@ if ($_SESSION["usertype"] == "User" || $_SESSION["usertype"] == "Coach") {
       </div>
       <ul class="nav-links">
         <li>
-          <a href="#" class="active">
+          <a href="dashboard_court">
             <i class='bx bx-grid-alt'></i>
             <span class="links_name">Dashboard</span>
           </a>
         </li>
         <li>
-          <a href="court-bookings">
+          <a href="#" class="active">
             <i class='bx bx-list-ul'></i>
             <span class="links_name">Bookings</span>
           </a>

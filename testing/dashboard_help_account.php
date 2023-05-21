@@ -21,31 +21,30 @@
     <!---Sidebar-->
     <div class="sidebar">
       <div class="d-flex flex-column align-items-center text-center mt-5 ">
-        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle bg-white " width="150">
-        <span class="logo_name text-white mt-3">Boss Amo</span>
+        <img src="../static/images/CourtCom_Logo_more_stroke.png" alt="CourtCom_Logo" width="150">
       </div>
       <ul class="nav-links">
         <li>
           <a href="dashboard_order_product.html" class="active">
             <i class='bx bx-grid-alt'></i>
-            <span class="links_name">Orders</span>
+            <span class="links_name">Dashboard</span>
           </a>
         </li>
         <li>
           <a href="dashboard_pastreview_product.html">
             <i class='bx bx-list-ul'></i>
-            <span class="links_name">Past Reviews</span>
+            <span class="links_name">Bookings</span>
           </a>
         </li>
         <li>
           <a href="dashboard_orderhistory_product.html">
             <i class='bx bx-coin-stack'></i>
-            <span class="links_name">Order History</span>
+            <span class="links_name">Requests</span>
           </a>
         </li>
 		<li>
           <a href="#">
-            <i class='bx bx-coin-stack'></i>
+            <i class='bx bx-cog'></i>
             <span class="links_name">Settings</span>
           </a>
         </li>
@@ -61,7 +60,7 @@
       	<header>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
-					
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis fugit ducimus voluptate voluptates suscipit totam excepturi id ad necessitatibus eum eaque animi adipisci, odit pariatur eius. Ratione autem aliquid quo.
 					
                 </div>
             </nav>
