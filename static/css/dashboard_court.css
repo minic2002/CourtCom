@@ -12,6 +12,13 @@
     font-family: Inter;
 }
 
+/* center card  */
+.row-centered {
+    display: flex;
+    justify-content: center;
+  }
+/* end of center card*/
+
 body {
     background: -webkit-linear-gradient(60deg, #fcde67 100%, #5BCCF6 100%);
     background: linear-gradient(60deg, #fcde67, #5BCCF6);

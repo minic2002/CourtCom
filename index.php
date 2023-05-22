@@ -5,7 +5,7 @@ ob_start(); // Start output buffering
 ?>
 	<!-- Navbar -->
 		
-	
+		
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container-fluid">
 			<a class="navbar-brand" href="dashboard"><img src="static/images/CourtCom_Logo_more_stroke.png" width="135"></a>

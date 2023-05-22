@@ -14,6 +14,16 @@ if ($_SESSION["usertype"] == "User" || $_SESSION["usertype"] == "Coach") {
         header("Location: dashboard_coach");
     }
     exit();
+
+    include "userdb.php";
+    $court_id = $_SESSION['court_id'];
+    $sql = "SELECT COUNT(book_court.court_id) FROM book_court INNER JOIN USERS ON book_court.user_id = users.user_id INNER JOIN COURT ON book_court.court_id = court.court_ID WHERE book_court.court_id = '$court_id'";
+    $result = mysqli_query($conn, $sql);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        // Display the details of the court
+        $book_count = mysqli_fetch_assoc($result);
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -76,17 +86,61 @@ if ($_SESSION["usertype"] == "User" || $_SESSION["usertype"] == "Coach") {
       </ul>
     </div>
     <section class="home-section">
-      	<header>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                  <h3>Dashboard</h3>
+      <header>
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <div class="container-fluid">
+                <h3>Dashboard</h3>
+              </div>
+          </nav>
+      </header>
+        <div class="home-content">
+          <div class="container mt-5">
+              <div class="row row-centered">
+                <div class="col-md-2">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Total Bookings</h5>
+                      <p class="card-text">100</p>
+                    </div>
+                  </div>
                 </div>
-            </nav>
-
-        </header>
-
- 
+                <div class="col-md-2">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Total Ratings</h5>
+                      <p class="card-text">50</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Total Reviews</h5>
+                      <p class="card-text">75</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Pending Requests</h5>
+                      <p class="card-text">10</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-2">
+                  <div class="card">
+                    <div class="card-body">
+                      <h5 class="card-title">Accepted Requests</h5>
+                      <p class="card-text">90</p>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+      </div>
     </section>
+
     <script>
       let sidebar = document.querySelector(".sidebar");
       let sidebarBtn = document.querySelector(".sidebarBtn");
