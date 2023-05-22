@@ -20,11 +20,12 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 }
 
 // Displaying the chosen court
+
     // Sanitize the input to prevent SQL injection
-    $court_id = mysqli_real_escape_string($conn, $_GET['id']);
+    $coach_id = mysqli_real_escape_string($conn, $_GET['id']);
     
     // Fetch the details of the court with the given ID
-    $query = "SELECT court.court_image, court.court_name, users.fname, users.lname, COALESCE(ROUND(AVG(review_court.rate), 1),'Unrated') AS total_rating, court.court_address, court.court_desc, court.court_type, court.rph FROM court INNER JOIN users ON court.user_ID = users.user_id INNER JOIN review_court ON review_court.court_id = court.court_id WHERE court.court_id = '$court_id'";
+    $query = "SELECT users.user_pic, users.fname, users.lname, COALESCE(ROUND(AVG(review_coach.rate), 1),'Unrated') AS total_rating, coach.sport_type, coach.RPH, coach.coach_desc FROM coach INNER JOIN users ON coach.user_ID = users.user_id INNER JOIN review_coach ON coach.coach_ID = review_coach.coach_id WHERE coach.coach_ID = '$coach_id'";
     $result = mysqli_query($conn, $query);
 
     if ($result && mysqli_num_rows($result) > 0) {
@@ -44,7 +45,7 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
     <link rel="stylesheet" type="text/css" href="static/bootstrap/bootstrap-5.0.2-dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="static/css/view-court.css">
-    <title>CourtCom | View Court </title>
+    <title>CourtCom | View Coach </title>
 	<link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
 </head>
 <body class="bg-container">
@@ -61,7 +62,7 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 					<a class="nav-link" href="dashboard">Main</a>
 					</li>
 					<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="#">View Court</a>
+					<a class="nav-link active" aria-current="page" href="#">View Coach</a>
 					</li>
 				</ul>
 				<div class="profile-icon" onclick="toggleSideMenu()">
@@ -69,7 +70,7 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 				</div>
 				<div class="side-menu">
 					<ul>
-					<li><a href="#"><?php echo $_SESSION["fname"] . " " . $_SESSION["lname"]; ?></a></li>
+					<li><a><?php echo $_SESSION["fname"] . " " . $_SESSION["lname"]; ?></a></li>
 					<li><a href="bookings"><i class="fa fa-clock-o"></i> Bookings </a></li>
 					<li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
 					<li><a href="logout"><i class="fa fa-sign-out"></i> Logout</a></li>
@@ -80,38 +81,36 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 		</nav>
 		<!--END OF NAVIGATION BAR-->
     <br>
-    <!--VIEW COURT-->
+    <!--VIEW COACH-->
             <div class="container">
                 <div class= "row">
                     <div class="col-md-6">
-                        <img src="<?php echo $row['court_image']; ?>" class='card-img-top crop-img shaonimg' alt="<?php echo $row['court_name']; ?>">
+                        <img src="<?php echo $row['user_pic']; ?>" class='card-img-top crop-img shaonimg' alt="<?php echo $row['fname'] . " " . $row['lname']; ?>">
                     </div>
                     <div class="col-md-6">
-                        <h2><?php echo strtoupper($row['court_name']) . ' <span class="fa fa-star"></span> ' . $row['total_rating']; ?></h2>
-                        <h4> Court Owner: <?php echo $row['fname'] . " " . $row['lname']; ?></h4>
-                        <h4>Court Address: <?php echo $row['court_address']; ?></h4>
-                        <h4>Court Description: <?php echo $row['court_desc']; ?></h4>
-                        <h4>Court Type: <?php echo $row['court_type']; ?></h4>
-                        <h4>Rate Per Hour: &#8369; <?php echo $row['rph']; ?> </h4>
-                        <button onclick="location.href='book-court?id=<?php echo $court_id; ?>'"> BOOK </button>
+                        <h2><?php echo strtoupper($row['fname'] . " " . $row['lname']) . ' <span class="fa fa-star"></span> ' . $row['total_rating']; ?></h2>
+                        <h4>Coach Description: <?php echo $row['coach_desc']; ?></h4>
+                        <h4>Sport Type: <?php echo $row['sport_type']; ?></h4>
+                        <h4>Rate Per Hour: &#8369; <?php echo $row['RPH']; ?> </h4>
+                        <button onclick="location.href='book-coach?id=<?php echo $coach_id; ?>'"> BOOK </button>
                     </div>
                 </div>
             </div>
 
-    <!--END OF VIEW COURT-->
+    <!--END OF VIEW COACH-->
     <br>
     <!--RATINGS AND REVIEW-->
         <div class="container">
         <h2>RATINGS AND REVIEWS</h2>
         <!--Make a review and rate-->
             <form method="POST" class="row g-3">
-                <input type="hidden" name="court_id" id="court_id" value="<?php echo $court_id; ?>">
+                <input type="hidden" name="coach_id" id="coach_id" value="<?php echo $coach_id; ?>">
                 <div class="col-md-6">
-                    <textarea maxlength="300" name="review_court" id="review_court" placeholder="Write a review" class="form-control" required></textarea>
+                    <textarea maxlength="300" name="review_coach" id="review_coach" placeholder="Write a review" class="form-control" required></textarea>
                 </div>
                 <div class="col-md-3">
-                    <select name="rate_court" id="rate_court" required class="form-select">
-                        <option disabled>Rate the court</option>
+                    <select name="rate_coach" id="rate_coach" required class="form-select">
+                        <option disabled>Rate the coach</option>
                         <option value="5">&#9733;&#9733;&#9733;&#9733;&#9733;</option>
                         <option value="4">&#9733;&#9733;&#9733;&#9733;</option>
                         <option value="3">&#9733;&#9733;&#9733;</option>
@@ -120,7 +119,7 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <button type="submit" name="rr_court" id="rr_court" class="btn btn-primary yellow-button">POST</button>
+                    <button type="submit" name="rr_coach" id="rr_coach" class="btn btn-primary yellow-button">POST</button>
                 </div>
             </form>
 
@@ -128,7 +127,7 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 
         <!--Display ratings and reviews-->
         <?php
-            $query = "SELECT users.user_pic, users.fname, users.lname, review_court.review_text, review_court.rate, review_court.review_date FROM review_court JOIN users ON review_court.user_id = users.user_id WHERE review_court.court_id = '$court_id' ORDER BY review_court.rate DESC";
+            $query = "SELECT users.user_pic, users.fname, users.lname, review_coach.review_text, review_coach.rate, review_coach.review_date FROM review_coach JOIN users ON review_coach.user_id = users.user_id WHERE review_coach.coach_id = '$coach_id' ORDER BY review_coach.rate DESC";
             $result = mysqli_query($conn, $query);
 
             if ($result && mysqli_num_rows($result) > 0) {
@@ -136,7 +135,7 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
                     echo '<div class="card mt-3">';
                     echo '<div class="card-body">';
                     echo '<div class="d-flex align-items-center">';
-                    echo '<img src="'.$row['user_pic'].'" class="rounded-circle me-3" width="50" height="50" alt=" '.$row['fname'].' '.$row['lname']. ' ">';
+                    echo '<img src="'.$row['user_pic'].'" class="rounded-circle me-3" width="50" height="50" alt="User Picture">';
                     echo '<div>';
                     echo '<h5 class="card-title mb-0">'.$row['fname'].' '.$row['lname']. ' ' . '<span class="fa fa-star"></span> ' . $row['rate'] . '</h5>';
                     echo '<h6 class="text-muted">'.$row['review_date'].'</h6>';
@@ -155,7 +154,6 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
         <!--End of displaying-->
         </div>
     <!--END OF RATINGS AND REVIEW-->
-
 
     <!--JAVASCRIPT-->
     <script>

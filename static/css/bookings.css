@@ -123,14 +123,15 @@ h2 {
   display: none; /* Hide the overlay by default */
 }
 
-
+/*Side Menu*/
 .side-menu {
   position: fixed;
   top: 0;
   right: 0;
   bottom: 0;
   width: 250px;
-  background-color: #fff;
+  background-color: #343a40;
+  color: #fff;
   transform: translateX(100%);
   transition: transform 0.3s ease-in-out;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -142,19 +143,25 @@ h2 {
   padding: 0;
 }
 
-.side-menu li {
+.side-menu li{
   margin-bottom: 10px;
 }
 
 .side-menu li a {
   display: block;
   padding: 10px;
-  color: #333;
+  color: #fff;
   text-decoration: none;
 }
 
 .side-menu li a:hover {
   background-color: #f2f2f2;
+  color: #343a40;
+}
+
+.side-menu a:hover {
+  background-color: #f2f2f2;
+  color: #343a40;
 }
 
 .side-menu.active {
@@ -164,6 +171,7 @@ h2 {
 .side-menu.active + .overlay {
 	display: block;
 }
+/*End of Side Menu*/
 
 /* 
 button {

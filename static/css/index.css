@@ -1,5 +1,8 @@
 html {
 	scroll-behavior: smooth;
+	margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 body {
 	margin: 0;
@@ -10,11 +13,26 @@ body {
 }
 
 .navbar {
+	background-color: #f8f9fa;
 	position: sticky;
 	top: 0;
-	z-index: 9999;
+	z-index: 1000;
+}
+.navcon {
+	background-color: #f8f9fa;
+	position: sticky;
+	top: 0;
+	z-index: 1000;
 }
 
+.container {
+	background-color: #f8f9fa;
+	position: sticky;
+}
+.first-part{
+	background-color: #f8f9fa;
+	position: sticky;
+}
 .logo {
 	width: 550px;
 	height: auto;
@@ -52,15 +70,125 @@ section{
 	width: 100%;
 	align-items: center;
 	justify-content: center;
-	
+	position:relative;
 	font-size: 70px;
   }
+
+#CourtRent{
+	height: 100%;
+	background-image: url("/CourtCom/static/images/court.webp");
+	background-size: 100% 100%;
+	background-position: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+#CourtRent .btn {
+	background: #5BCCF6;
+	font-size: 18px;
+	padding: 12px 30px;
+	align-items: center;
+	border-radius: 6px;
+	color: #ffffff;
+	border: none;
+}
+
+.container{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 25px;
+	background-color:rgba(255, 255, 255, 0.7 );
+}
+hr{
+	width: 80%;
+	color:rgb(0, 0, 0)
+}
+.container h2{
+	font-size: 30px;
+}
+.boxitems{
+	display: flex;
+	margin: 30px auto;
+	flex-wrap: wrap;
+	align-items: center;
+	
+}
+.one,.two,.three{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 28%;
+	margin: 30px auto;
+	padding: 35px 15px;
+	border-radius: 15px;
+	text-align: center;
+	min-width: 250px;
+	background-color: whitesmoke;
+}
+.one{
+	height: 250px;
+	box-shadow: 0 15px 15px #000000;
+	border: 1px solid rgb(0, 0, 0);
+}
+.two{
+	height: 250px;
+	box-shadow: 0 15px 15px #000000;
+	border: 1px solid rgb(0, 0, 0);
+}
+.three{
+	height: 250px;
+	box-shadow: 0 15px 15px #000000;
+	border: 1px solid rgb(0, 0, 0);
+}
+p{
+	font-size: 20px;
+}
+
   
   #Coach{
-	background: beige;
+	background-color:#343a40;
 	overflow: hidden;
+	display: flex;
+	justify-content: center;
+	align-items: center;
   }
+  #Coach .image-column {
+	display: flex;
 
+}
+
+
+#Coach .image-column img {
+	max-width: 100%;
+	height: auto;
+}
+
+#Coach .description-column {
+	padding: 20px;
+	background-color: #fcde67;
+	height: 50%;
+}
+
+#Coach .description-column h2 {
+	margin-top: 0;
+	font-size: 30px;
+}
+#Coach .description-column p {
+	font-size: 50px;
+}
+.butn {
+	justify-content: center;
+}
+#Coach .btn {
+	background: #5BCCF6;
+	font-size: 18px;
+	padding: 12px 30px;
+	align-items: center;
+	border-radius: 6px;
+	color: #ffffff;
+	border: none;
+}
 
   .button a{
 	position: fixed;
@@ -117,12 +245,7 @@ section{
 	margin-top: 2rem;
 	color: #ee6c09;
   }
-  #CourtRent{
-	color:whitesmoke;
-	background-image: linear-gradient(rgba(0, 0, 0, 0.527),rgba(0, 0, 0, 0.5)) , url("/CourtCom/static/images/court.webp");
-	background-size: 100% 100%;
-	background-position: center;
-  }
+
 
   #How {
 	  box-sizing: border-box;
@@ -131,7 +254,7 @@ section{
 	  justify-content: center;
 	  align-items: center;
 	  min-height: 100vh;
-	  background: linear-gradient(#0f4675,#0f4675 50%, #fff 50%, #fff 100%);
+	  background: linear-gradient(#0f4675,#5BCCF6 , #fff 50%, #fff 100%);
   }
  #How .con {
 	  width: 1100px;
@@ -179,12 +302,12 @@ section{
 	font-size:1em;
 	font-weight: 800;
 	z-index: 1;
-	opacity: 0.1;
+	opacity: 0.3;
 	transition: 0.5s;
 }
 #How .con .box:hover h2 {
 	opacity: 1;
-	color: #fff;
+	color: #343a40;
 	transform: translateY(-40px)
 }
 #How .con .box h3 {
@@ -202,6 +325,200 @@ section{
 	transition: 0.5s;
 }
 #How .con .box:hover h3, #How .con .box:hover p {
+	color: #343a40;
+	
+}
+
+#About {
+	width: 100%;
+	padding: 78px 0px;
+	background-color: #191919;
+	font-family: 'Monaco', Monospace;
+	box-sizing: border-box;
+}
+
+#About img {
+	height: 100%;
+	width: 400px;
+
+}
+
+.about-text {
+	width: 550px;
+}
+
+.main {
+	width: 1130px;
+	max-width: 95%;
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.about-text h1 {
+	color: whitesmoke;
+	font-size: 80px;
+	text-transform: capitalize;
+	margin-bottom: 20px;
+}
+.about-text p {
+	color: lightseagreen;
+	letter-spacing: 1px;
+	line-height: 28px;
+	font-size: 18px;
+	margin-bottom: 45px;
+}
+
+#team {
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	background: #161623;
+	height: 100%;
 	color: #fff;
 	
+}
+#team h2 {
+	padding-top: 50px;
+	font-size: 40px;
+	text-align: center;
+	
+}
+
+.teamcon {
+	position: relative;
+	z-index: 1;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	margin: 40px 0;
+
+}
+
+.teamcon .card {
+	position: relative;
+	width: 300px;
+	height: 400px;
+	background: rgba(255,255,255,0.05);
+	margin: 20px;
+	box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+	border-radius: 15px;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	backdrop-filter: blur(10px);
+}
+.teamcon .card .teamcontent {
+	position: relative;
+	display:flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	opacity:  0.5;
+	transition: 0.5s;
+}
+.teamcon .card:hover .teamcontent{
+	opacity: 1;
+	transform: translateY(-20px);
+}
+.teamcon .card .teamcontent .imgBx {
+	position: relative;
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+	overflow: hidden;
+	border: 10px solid rgba(0, 0, 0, 0.25);
+}
+.teamcon .card .teamcontent .imgBx img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.teamcon .card .teamcontent .contentBx h3 {
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	font-weight: 500;
+	font-size: 18px;
+	text-align: center;
+	margin: 20px 0 10px;
+	line-height: 1.1em;
+
+}
+.teamcon .card .teamcontent .contentBx h3 span {
+	font-size: 12px;
+	font-weight: 300;
+	text-transform: initial;
+}
+.teamcon .card .sci {
+	position: absolute;
+	bottom: 50px;
+	display:flex;
+	
+}
+.teamcon .card .sci li {
+	list-style: none;
+	margin: 0 10px;
+	transform: translateY(40px);
+	transition: 0.5s;
+	opacity: 0;
+	transition-delay: calc(0.1s * var(--i));
+}
+.teamcon .card:hover .sci li {
+	transform: translateY(0px);
+	opacity: 1;
+}
+.teamcon .card .sci li a {
+	color: #fff;
+	font-size: 24px;
+	
+}
+#foot {
+	
+	background-color: #333;
+	color: #fff;
+	height: 100px;
+	bottom: 0;
+	width: 100%;
+	/* position: fixed;
+	z-index: 1; */
+  }
+  #foot .footcontent {
+	display: flex;
+	text-align: center;
+	padding: 20px;
+	position: absolute;
+	font-size: 20px;
+  }
+.socials{
+	top: 50px;
+	left: 50px;
+	bottom: 10px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+	position: absolute;
+    margin: 1rem 0 3rem 0;
+}
+.socials li{
+    margin: 0 10px;
+}
+.socials a{
+    text-decoration: none;
+    color: #fff;
+}
+.socials a i{
+    font-size: 1.1rem;
+    transition: color .4s ease;
+
+}
+.socials a:hover i{
+    color: aqua;
 }

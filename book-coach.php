@@ -20,10 +20,10 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 }
 
     // Retrieve court ID from URL parameter
-    $court_id = mysqli_real_escape_string($conn, $_GET['id']);
+    $coach_id = mysqli_real_escape_string($conn, $_GET['id']);
     
     // Fetch court details
-    $query = "SELECT court.court_image, court.court_name, users.fname, users.lname, court.court_address, court.court_desc, court.court_type, court.rph, court.Availability FROM court JOIN users ON court.user_ID = users.user_id WHERE court_id = '$court_id'";
+    $query = "SELECT users.user_pic, users.fname, users.lname FROM coach JOIN users ON coach.user_ID = users.user_id WHERE coach.coach_ID = '$coach_id'";
     $result = mysqli_query($conn, $query);
     
     if ($result && mysqli_num_rows($result) > 0) {
@@ -32,14 +32,14 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 
     // Check if user has already booked the court
     $user_id = $_SESSION["user_id"];
-    $sql = "SELECT book_court.bcrt_id FROM book_court INNER JOIN users ON book_court.user_id = users.user_id INNER JOIN court ON book_court.court_id = court.court_id WHERE book_court.court_id = '$court_id' AND book_court.user_id = '$user_id'";
+    $sql = "SELECT book_coach.bcch_id FROM book_coach INNER JOIN users ON book_coach.user_id = users.user_id INNER JOIN coach ON book_coach.coach_id = coach.coach_id WHERE book_coach.coach_id = '$coach_id' AND book_coach.user_id = '$user_id'";
     $resulta = mysqli_query($conn, $sql);
 
     if ($resulta && mysqli_num_rows($resulta) > 0) {
-            $book_court = mysqli_fetch_assoc($resulta);
-            $bcrt_id = $book_court['bcrt_id'];
+            $book_coach = mysqli_fetch_assoc($resulta);
+            $bcch_id = $book_coach['bcch_id'];
         // User has already booked the court, redirect them pay booked court if they haven't paid yet
-        header("Location: pay-booked-court?id=$bcrt_id");
+        header("Location: pay-booked-coach?id=$bcch_id");
         exit();
     }
 
@@ -72,10 +72,10 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 					<a class="nav-link" href="dashboard">Main</a>
 					</li>
 					<li class="nav-item">
-					<a class="nav-link" href="view-court?id=<?php echo $court_id; ?>">View Court</a>
+					<a class="nav-link" href="view-coach?id=<?php echo $coach_id; ?>">View Coach</a>
 					</li>
 					<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="#">Book Court</a>
+					<a class="nav-link active" aria-current="page" href="#">Book Coach</a>
 					</li>
 				</ul>
 				<div class="profile-icon" onclick="toggleSideMenu()">
@@ -98,9 +98,8 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
-                <img src="<?php echo $row['court_image']; ?>" class='card-img-top crop-img shaonimg' alt="<?php echo $row['court_name']; ?>">
-                <h2><?php echo strtoupper($row['court_name']); ?></h2>
-                <h4> Owned by <?php echo $row['fname'] . " " . $row['lname']; ?></h4>
+                <img src="<?php echo $row['user_pic']; ?>" class='card-img-top crop-img shaonimg' alt="<?php echo $row['fname'] . " " . $row['lname']; ?>">
+                <h2><?php echo strtoupper($row['fname'] . " " . $row['lname']); ?></h2>
                 </div>
                 <div class="col-md-6">
                     <h2>BOOKER INFO</h2>
@@ -109,7 +108,7 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
                             <label for="b_fullname" class="form-label">Booker Name</label>
                             <input type="text" class="form-control" id="b_fullname" name="b_fullname" value="<?php echo $_SESSION["fname"] . " " . $_SESSION["lname"]; ?>" readonly>
                         </div>
-                        <input type="hidden" name="court_id" value="<?php echo $court_id; ?>">
+                        <input type="hidden" name="coach_id" id="coach_id" value="<?php echo $coach_id; ?>">
                         <div class="mb-3">
                             <label for="s_time" class="form-label">Start Time</label>
                             <input type="time" class="form-control" id="s_time" name="s_time" required>
@@ -123,7 +122,7 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
                             <input type="date" class="form-control" id="bodate" name="bodate" required>
                         </div>
                         <div class="mb-3">
-                            <input type="submit" name="bo_court" id="bo_court" value="Book Now">
+                            <input type="submit" name="bo_coach" id="bo_coach" value="Book Now">
                         </div>
                     </form>
                 </div>

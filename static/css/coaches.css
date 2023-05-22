@@ -11,6 +11,7 @@ body {
 	font-family: Inter;
 	font-weight: bold;
 	font-size: 25px;
+	
 }
 
 .navbar {
@@ -25,54 +26,63 @@ h2 {
   font-weight: bold;
 }
 
-h1, p {
+h1 {
 	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-.wrapper {
-  display: flex;
-  flex-wrap: wrap;
-}
 
 /*CARD PART*/
-.kard {
+.court-card {
   position: relative;
-  width: 18rem;
-  display:inline-block;
+  cursor: pointer;
+  margin-bottom: 20px;
 }
 
-.card-img-overlay {
+.court-card img {
   border-radius: 10px;
-  opacity: 0;
-  transition: opacity 0.5s;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  object-fit: cover;
+  width: 300px;
+  height: 200px;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.court-details {
   position: absolute;
   top: 0;
-  left: 0;
+  width: 300px; 
   height: 100%;
-  width: 100%;
-}
-
-.card-title {
+  background-color: rgba(0, 0, 0, 0.8);
   color: #fff;
-  font-size: 24px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
 }
 
-.kard:hover .card-img-overlay {
+.court-card:hover .court-details {
   opacity: 1;
+  left: 0;
 }
 
 
+.court-details h3,
+.court-details p {
+  margin: 0;
+  padding: 5px;
+}
+/*END OF CARD PART */
+
+/*
 .crop-img {
-  /*border-radius: 10px;*/
+  border-radius: 10px;
   object-fit: cover;
-  /*width: 290px;*/
-  height: 570px;
+  width: 240px;
+  height: 135px;
 }
+*/
 
 .bg-container {
   background-color: #fff;
@@ -84,46 +94,13 @@ h1, p {
 }
 
 
-/*
-.navbar-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px; 
-  width: 100%;
-  background-color: #5BCCF6;
-  color: #000;
+/* hidden scrollbar */
+
+/* For WebKit based browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 0.0em; /*Set a width for the scrollbar (optional) */
 }
-
-
-.navbar {
-  display: flex;
-  list-style: none;
-  padding: 0;
-}
-
-.navbar li {
-  margin-right: 20px;
-}
-
-.navbar li:last-child {
-  margin-right: 0;
-}
-
-.navbar li a {
-  color: #000;
-  text-transform: uppercase;
-  font-size: 25px;
-  text-decoration: none;
-  cursor: pointer;
-}
-*/
-
-
-
-
-
-/*END OF CARD PART */
+/* end hidden */
 
 .profile-icon {
   display: flex;
@@ -155,7 +132,7 @@ h1, p {
   display: none; /* Hide the overlay by default */
 }
 
-/*Side Menu*/
+
 .side-menu {
   position: fixed;
   top: 0;
@@ -203,12 +180,4 @@ h1, p {
 .side-menu.active + .overlay {
 	display: block;
 }
-/*End of Side Menu*/
 
-/* hidden scrollbar */
-
-/* For WebKit based browsers (Chrome, Safari) */
-::-webkit-scrollbar {
-  width: 0.0em; /*Set a width for the scrollbar (optional) */
-}
-/* end hidden */

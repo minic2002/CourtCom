@@ -1,0 +1,1 @@
+SELECT users.user_pic, users.fname, users.lname, COALESCE(ROUND(AVG(review_coach.rate), 1),'Unrated') AS total_rating, coach.sport_type, coach.RPH, coach.coach_desc FROM coach INNER JOIN users ON coach.user_ID = users.user_id INNER JOIN review_coach ON coach.coach_ID = review_coach.coach_id WHERE coach.coach_ID = '$coach_id'

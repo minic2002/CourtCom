@@ -31,7 +31,7 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 		<link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
 		<link rel="stylesheet" type="text/css" href="static/bootstrap/bootstrap-5.0.2-dist/css/bootstrap.min.css">
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-		<link rel="stylesheet" type="text/css" href="static/css/courts.css">
+		<link rel="stylesheet" type="text/css" href="static/css/coaches.css">
 	</head>
 	<body class="bg-container">
 		<!--NAVIGATION BAR-->
@@ -47,10 +47,10 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 					<a class="nav-link" href="dashboard">Main</a>
 					</li>
 					<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="#">Court</a>
+					<a class="nav-link" href="courts">Court</a>
 					</li>
 					<li class="nav-item">
-					<a class="nav-link" href="coaches">Coach</a>
+					<a class="nav-link active" aria-current="page" href="#">Coach</a>
 					</li>
 					<li class="nav-item">
 					<a class="nav-link" href="#">Categories</a>
@@ -73,70 +73,71 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 
 		<!--END OF NAVIGATION BAR-->
 		<br> 
-				
-		<!--DISPLAY COURTS-->
-		<?php
-		// Your database connection code here
-		include "userdb.php";
-		// Your query here
-		$query = "SELECT court.court_id, court.court_name, court.court_image FROM court JOIN users ON court.user_ID = users.user_id";
+		
+<!--DISPLAY COACHES-->
+<?php
+// Your database connection code here
+include "userdb.php";
+// Your query here
+$query = "SELECT coach.coach_ID, users.user_pic, users.fname, users.lname FROM coach JOIN users ON coach.user_ID = users.user_id;";
 
-		// Execute the query
-		$result = mysqli_query($conn, $query);
-		?>
+// Execute the query
+$result = mysqli_query($conn, $query);
+?>
 
-		<div class="container">
-			<div class="row">
-				<?php while ($row = mysqli_fetch_assoc($result)) { ?>
-					<div class="col-md-4">
-						<div class="court-card" data-courtid="<?php echo $row['court_id']; ?>">
-							<img src="<?php echo $row['court_image']; ?>" alt="<?php echo $row['court_name']; ?>" class="crop-img">
-							<div class="court-details">
-								<h3><?php echo $row['court_name']; ?></h3>
-							</div>
-						</div>
-					</div>
-				<?php } ?>
-			</div>
-		</div>
+<div class="container">
+    <div class="row">
+        <?php while ($row = mysqli_fetch_assoc($result)) { ?>
+            <div class="col-md-4">
 
-		<?php
-		// Close the database connection
-		mysqli_close($conn);
-		?>
+                <img src="<?php echo $row['user_pic']; ?>" class="rounded-circle" width="140" height="140" style="object-fit: cover;">
 
-		<!--END OF DISPLAY-->
+                <h2><?php echo $row['fname'] . ' ' . $row['lname']; ?></h2>
+                <p><a class="btn btn-secondary" href="view-coach?id=<?php echo $row['coach_ID']; ?>">View details »</a></p>
 
-		<!--JAVASCRIPT AREA-->
-		<script>
-			function toggleSideMenu() {
-				document.querySelector(".side-menu").classList.toggle("active");
-				document.addEventListener("click", function(event) {
-					const target = event.target;
-					if (!target.closest(".side-menu") && !target.closest(".profile-icon")) {
-						document.querySelector(".side-menu").classList.remove("active");
-					}
-				});
-			}
-		</script>
+            </div><!-- /.col-lg-4 -->
 
-		<script>
-			document.addEventListener("DOMContentLoaded", function() {
-				var courtCards = document.querySelectorAll(".court-card");
+        <?php } ?>
+    </div>
+</div>
 
-				courtCards.forEach(function(card) {
-					var courtId = card.getAttribute("data-courtid");
-					card.addEventListener("click", function() {
-						window.location.href = "view-court?id=" + courtId;
-					});
-				});
-			});
+<?php
+// Close the database connection
+mysqli_close($conn);
+?>
 
-		</script>
+<!--END OF DISPLAY-->
 
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-		<script src="static/js/courtcom.js"></script>
-		<!--END OF JAVASCRIPT-->
+<!--JAVASCRIPT AREA-->
+<script>
+    function toggleSideMenu() {
+        document.querySelector(".side-menu").classList.toggle("active");
+        document.addEventListener("click", function(event) {
+            const target = event.target;
+            if (!target.closest(".side-menu") && !target.closest(".profile-icon")) {
+                document.querySelector(".side-menu").classList.remove("active");
+            }
+        });
+    }
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var courtCards = document.querySelectorAll(".court-card");
+
+        courtCards.forEach(function(card) {
+            var courtId = card.getAttribute("data-courtid");
+            card.addEventListener("click", function() {
+                window.location.href = "view-court?id=" + courtId;
+            });
+        });
+    });
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="static/js/courtcom.js"></script>
+<!--END OF JAVASCRIPT-->
 
 	</body>
 </html>

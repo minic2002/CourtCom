@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2023 at 01:33 AM
+-- Generation Time: May 22, 2023 at 12:07 AM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -35,8 +35,21 @@ CREATE TABLE `book_coach` (
   `Start_Time` time NOT NULL,
   `End_Time` time NOT NULL,
   `Booking_Date` date NOT NULL,
-  `Booking_Status` int(11) NOT NULL
+  `Booking_Status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `book_coach`
+--
+
+INSERT INTO `book_coach` (`bcch_id`, `user_id`, `coach_id`, `Start_Time`, `End_Time`, `Booking_Date`, `Booking_Status`) VALUES
+(8, 77, 6, '06:00:00', '21:00:00', '2023-05-31', 'Pending'),
+(9, 29, 6, '09:00:00', '12:00:00', '2023-05-30', 'Pending'),
+(10, 29, 5, '08:00:00', '09:00:00', '2023-05-25', 'Pending'),
+(11, 29, 3, '14:00:00', '16:00:00', '2023-05-25', 'Pending'),
+(13, 29, 4, '15:30:00', '17:00:00', '2023-05-24', 'Pending'),
+(14, 37, 6, '06:00:00', '20:00:00', '2023-05-24', 'Pending'),
+(15, 77, 3, '07:00:00', '08:00:00', '2023-05-31', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -59,12 +72,9 @@ CREATE TABLE `book_court` (
 --
 
 INSERT INTO `book_court` (`bcrt_id`, `user_id`, `court_id`, `Start_Time`, `End_Time`, `Booking_Date`, `Booking_Status`) VALUES
-(31, 29, 12, '13:00:00', '04:00:00', '2023-05-17', 'Pending'),
-(34, 29, 7, '06:00:00', '08:00:00', '2023-05-13', 'Pending'),
-(35, 29, 14, '07:00:00', '08:00:00', '2023-05-24', 'Pending'),
-(40, 29, 16, '09:00:00', '12:00:00', '2023-05-26', 'Pending'),
-(41, 70, 16, '12:00:00', '16:00:00', '2023-06-09', 'Pending'),
-(43, 29, 13, '09:00:00', '12:00:00', '2023-05-21', 'Pending');
+(57, 37, 13, '16:00:00', '17:00:00', '2023-05-24', 'Pending'),
+(58, 29, 13, '10:00:00', '12:00:00', '2023-05-30', 'Pending'),
+(59, 29, 7, '16:00:00', '18:00:00', '2023-05-24', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -122,7 +132,8 @@ INSERT INTO `court` (`court_ID`, `user_ID`, `court_name`, `court_image`, `court_
 (13, 71, 'Waren Swim Training', 'static/images/court_images/Waren Swim Training-71.jpg', 'Sanciangko St. Cebu City', 'Waren Swim Training is a pool training facility for people who love to practice swimming.', 'Swimming', 50, ' '),
 (14, 73, 'Queen Volleyballanan', 'static/images/court_images/Queen Volleyballanan-73.jpg', 'OsmeÃ±a Blvd. Cebu City', 'Pull up in the monster automobile gangster. With a bad bitch that came from Sri Lanka.', 'Volleyball', 500, ' '),
 (15, 74, 'Janine DaGym', 'static/images/court_images/Janine DaGym-74.jpg', 'OsmeÃ±a Blvd. Cebu City', 'Practisanan og sayaw', 'Dance', 30, ' '),
-(16, 75, 'Dan Mark Gym', 'static/images/court_images/Dan Mark Gym-75.jpg', 'Sanciangko St. Cebu City', 'Practisanan sa mga gymnast', 'Gymnastics', 80, ' ');
+(16, 75, 'Dan Mark Gym', 'static/images/court_images/Dan Mark Gym-75.jpg', 'Sanciangko St. Cebu City', 'Practisanan sa mga gymnast', 'Gymnastics', 80, ' '),
+(17, 79, 'Green Valley Court', 'static/images/court_images/Green Valley Court-79.jpg', 'Lomboy St. Banawa, Cebu City', 'Green Valley Court has various courts that users can utilize: Basketball, Volleyball, Swimming Pool, Oval, and Badminton', 'General', 80, ' ');
 
 -- --------------------------------------------------------
 
@@ -138,6 +149,19 @@ CREATE TABLE `pay_booked_coach` (
   `payment_status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `pay_booked_coach`
+--
+
+INSERT INTO `pay_booked_coach` (`pbcch_id`, `bcch_id`, `payment_type`, `payment_amount`, `payment_status`) VALUES
+(1, 8, 'Walk-In Payment', 675, 'Walk-In Payment'),
+(2, 9, 'Walk-In Payment', 135, 'Walk-In Payment'),
+(3, 10, 'Walk-In Payment', 50, 'Walk-In Payment'),
+(4, 11, 'Walk-In Payment', 200, 'Walk-In Payment'),
+(5, 13, 'Walk-In Payment', 170, 'Walk-In Payment'),
+(6, 14, 'Walk-In Payment', 630, 'Walk-In Payment'),
+(7, 15, 'Walk-In Payment', 100, 'Walk-In Payment');
+
 -- --------------------------------------------------------
 
 --
@@ -152,6 +176,15 @@ CREATE TABLE `pay_booked_court` (
   `payment_status` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `pay_booked_court`
+--
+
+INSERT INTO `pay_booked_court` (`pbcrt_id`, `bcrt_id`, `payment_type`, `payment_amount`, `payment_status`) VALUES
+(7, 57, 'Walk-In Payment', 50, 'Walk-In Payment'),
+(8, 58, 'Walk-In Payment', 100, 'Walk-In Payment'),
+(9, 59, 'Walk-In Payment', 100, 'Walk-In Payment');
+
 -- --------------------------------------------------------
 
 --
@@ -164,8 +197,17 @@ CREATE TABLE `review_coach` (
   `coach_id` int(6) NOT NULL,
   `review_text` varchar(300) NOT NULL,
   `rate` int(5) NOT NULL,
-  `review_date` date NOT NULL
+  `review_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `review_coach`
+--
+
+INSERT INTO `review_coach` (`review_coach_id`, `user_id`, `coach_id`, `review_text`, `rate`, `review_date`) VALUES
+(2, 77, 6, 'He\'s a nice coach', 5, '2023-05-21 02:59:22'),
+(5, 77, 5, 'She is the best singer', 5, '2023-05-21 03:21:11'),
+(6, 29, 6, 'Maayo kaayo siya nga coach', 5, '2023-05-21 21:59:03');
 
 -- --------------------------------------------------------
 
@@ -178,9 +220,34 @@ CREATE TABLE `review_court` (
   `user_id` int(6) NOT NULL,
   `court_id` int(6) NOT NULL,
   `review_text` varchar(300) NOT NULL,
-  `rate` int(5) NOT NULL,
-  `review_date` date NOT NULL
+  `rate` float NOT NULL,
+  `review_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `review_court`
+--
+
+INSERT INTO `review_court` (`review_court_id`, `user_id`, `court_id`, `review_text`, `rate`, `review_date`) VALUES
+(1, 77, 7, 'nindot ra mn siya', 4, '2023-05-20 23:40:30'),
+(3, 29, 7, 'Actually it\'s good but layo kaayo', 5, '2023-05-21 00:18:08'),
+(5, 37, 10, 'pagkawalay ayong basketanan, duol kaayo sa kanal pirmi mahog sa kanal ang bola giatay kaayo', 1, '2023-05-21 00:26:42'),
+(6, 37, 7, 'it is a good court, it is named after my favorite album by my favorite artist. and I\'m shock that she also owned this court as well', 5, '2023-05-21 00:39:42'),
+(7, 70, 16, 'nindot kaayo iyahang gym, daghan kaayog equipments nice', 5, '2023-05-21 00:42:26'),
+(8, 70, 10, 'mao diayng tag 10 ra ang oras kay bati diay kaayo shuta', 1, '2023-05-21 00:43:51'),
+(9, 77, 15, 'limpyo kaayo ilang gym nya makapractice tag sayaw og tarong', 5, '2023-05-21 01:02:25'),
+(11, 70, 7, 'the court is ok for me', 3, '2023-05-21 02:02:27'),
+(12, 70, 13, 'nindot kaayo ang swimming pool', 5, '2023-05-21 02:13:33'),
+(15, 77, 13, 'limpyo kaayo ang swimming pool, nindot kaayo practisanan og langoy2x', 5, '2023-05-21 03:35:37'),
+(16, 78, 7, 'This court is so good', 5, '2023-05-21 04:28:15'),
+(17, 78, 13, 'My experience in this court is so wonderful', 4, '2023-05-21 04:38:40'),
+(18, 78, 15, 'Mobalik jd ko diri og book kay nindot kaayo facility and it\'s so clean', 5, '2023-05-21 05:08:33'),
+(19, 78, 8, 'this basketball court is so good', 5, '2023-05-21 05:19:16'),
+(20, 37, 16, 'ganahan ko diri nga gym', 4, '2023-05-21 06:20:46'),
+(21, 37, 8, 'this basketball is ok', 3, '2023-05-21 10:32:56'),
+(22, 37, 15, 'nice kaayo ang dance gym barato ra kaayo ', 5, '2023-05-21 10:52:01'),
+(23, 29, 13, 'naka suway na mig practice diri, to tell you honestly, nice kaayo diri jd promise', 5, '2023-05-21 12:16:38'),
+(24, 77, 10, 'ang nakanindot ani kay barato ra jd kaayo pero dili ko ganahan sa environment sa place', 3, '2023-05-21 19:49:47');
 
 -- --------------------------------------------------------
 
@@ -206,22 +273,24 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`user_id`, `fname`, `lname`, `user_pic`, `usertype`, `email`, `pnumber`, `password`) VALUES
 (29, 'Heather', 'Johnson', 'static/images/profile_pictures/HeatherJohnson09876540123.jpg', 'User', 'heatherjohnson@gmail.com', '09876540123', '202cb962ac59075b964b07152d234b70'),
 (37, 'Zach ', 'Rockwell', 'static/images/profile_pictures/ZachRockwell09990011110.jpg', 'User', 'zachrock@gmail.com', '09990011110', '202cb962ac59075b964b07152d234b70'),
-(55, 'Doja ', 'Cat', '', 'Coach', 'dojacat@gmail.com', '09563451234', '202cb962ac59075b964b07152d234b70'),
-(56, 'Randall Iverson', 'Dela Pisa', '', 'Coach', 'sire@gmail.com', '09352347865', '202cb962ac59075b964b07152d234b70'),
+(55, 'Doja ', 'Cat', 'static/images/profile_pictures/DojaCar09563451234.jpg', 'Coach', 'dojacat@gmail.com', '09563451234', '202cb962ac59075b964b07152d234b70'),
+(56, 'Randall', 'Dela Pisa', 'static/images/profile_pictures/RandallIversonDelaPisa09352347865.jpg', 'Coach', 'sire@gmail.com', '09352347865', '202cb962ac59075b964b07152d234b70'),
 (62, 'Taylor', 'Swift', '', 'Court Owner', 'taylorswift@uc.edu.ph', '09435672312', '202cb962ac59075b964b07152d234b70'),
 (63, 'Baron', 'Green', '', 'Court Owner', 'baron_green@gmail.com', '09643346537', '202cb962ac59075b964b07152d234b70'),
-(64, 'Ariana', 'Grande', '', 'Coach', 'arianagrande@gmail.com', '09893345645', '202cb962ac59075b964b07152d234b70'),
+(64, 'Ariana', 'Grande', 'static/images/profile_pictures/ArianaGrande09893345645.jpg', 'Coach', 'arianagrande@gmail.com', '09893345645', '202cb962ac59075b964b07152d234b70'),
 (65, 'Katy', 'Perry', '', 'Court Owner', 'katycat@gmail.com', '09232241234', '202cb962ac59075b964b07152d234b70'),
-(66, 'Ericson', 'Anuada', '', 'Court Owner', 'anuadaericson@gmail.com', '09345673421', '202cb962ac59075b964b07152d234b70'),
-(68, 'Mardon', 'Dela PeÃ±a', '', 'Court Owner', 'mardondelapena@gmail.com', '09436567768', '202cb962ac59075b964b07152d234b70'),
-(69, 'Christ Rile', 'Parinasan', '', 'Coach', 'rile@gmail.com', '09342257867', '202cb962ac59075b964b07152d234b70'),
-(70, 'Chandler', 'Brown', '', 'User', 'chandlerbrown@gmail.com', '09435576578', '202cb962ac59075b964b07152d234b70'),
+(66, 'Ericson', 'Anuada', 'static/images/profile_pictures/EricsonAnuada09345673421.jpg', 'Court Owner', 'anuadaericson@gmail.com', '09345673421', '202cb962ac59075b964b07152d234b70'),
+(68, 'Mardon', 'Dela PeÃ±a', 'static/images/profile_pictures/MardonDelaPena09436567768.jpg', 'Court Owner', 'mardondelapena@gmail.com', '09436567768', '202cb962ac59075b964b07152d234b70'),
+(69, 'Christ Rile', 'Parinasan', 'static/images/profile_pictures/ChristRile09352347865.jpg', 'Coach', 'rile@gmail.com', '09342257867', '202cb962ac59075b964b07152d234b70'),
+(70, 'Chandler', 'Brown', 'static/images/profile_pictures/ChandlerBrown09435576578.jpg', 'User', 'chandlerbrown@gmail.com', '09435576578', '202cb962ac59075b964b07152d234b70'),
 (71, 'Waren', 'Auman', '', 'Court Owner', 'warenauman@gmail.com', '09342215678', '202cb962ac59075b964b07152d234b70'),
 (73, 'Nicki', 'Minaj', 'static/images/profile_pictures/NickiMinaj09342285643.jpg', 'Court Owner', 'onickamaraj@gmail.com', '09342285643', '202cb962ac59075b964b07152d234b70'),
 (74, 'Janine', 'Ubal', 'static/images/profile_pictures/JanineUbal09884565577.jpg', 'Court Owner', 'ninbal@gmail.com', '09884565577', '202cb962ac59075b964b07152d234b70'),
 (75, 'Dan Mark', 'Sandigan', '', 'Court Owner', 'dms@gmail.com', '09545543423', '202cb962ac59075b964b07152d234b70'),
 (76, 'Gerda', 'Bagahansol', 'static/images/profile_pictures/GerdaBagahansol09342212121.jpeg', 'User', 'gerdabagahansol@gmail.com', '09342212121', '202cb962ac59075b964b07152d234b70'),
-(77, 'Dominic', 'Navos', 'static/images/profile_pictures/DominicNavos09994096196.jpg', 'User', 'dominicnavos@gmail.com', '09994096196', '202cb962ac59075b964b07152d234b70');
+(77, 'Dominic', 'Navos', 'static/images/profile_pictures/DominicNavos09994096196.jpg', 'User', 'dominicnavos@gmail.com', '09994096196', '202cb962ac59075b964b07152d234b70'),
+(78, 'Camila', 'Cabello', 'static/images/profile_pictures/CamilaCabello09992341214.jpg', 'User', 'camilacabello@gmail.com', '09992341214', '202cb962ac59075b964b07152d234b70'),
+(79, 'Rihanna', 'Rocky', 'static/images/profile_pictures/RihannaRocky09329231221.jpg', 'Court Owner', 'riri@gmail.com', '09329231221', '202cb962ac59075b964b07152d234b70');
 
 --
 -- Indexes for dumped tables
@@ -301,13 +370,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `book_coach`
 --
 ALTER TABLE `book_coach`
-  MODIFY `bcch_id` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `bcch_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `book_court`
 --
 ALTER TABLE `book_court`
-  MODIFY `bcrt_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `bcrt_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `coach`
@@ -319,37 +388,37 @@ ALTER TABLE `coach`
 -- AUTO_INCREMENT for table `court`
 --
 ALTER TABLE `court`
-  MODIFY `court_ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `court_ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `pay_booked_coach`
 --
 ALTER TABLE `pay_booked_coach`
-  MODIFY `pbcch_id` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `pbcch_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `pay_booked_court`
 --
 ALTER TABLE `pay_booked_court`
-  MODIFY `pbcrt_id` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `pbcrt_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `review_coach`
 --
 ALTER TABLE `review_coach`
-  MODIFY `review_coach_id` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `review_coach_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `review_court`
 --
 ALTER TABLE `review_court`
-  MODIFY `review_court_id` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `review_court_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `user_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- Constraints for dumped tables

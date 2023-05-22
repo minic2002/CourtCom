@@ -50,7 +50,7 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 					<a class="nav-link" href="courts">Court</a>
 					</li>
 					<li class="nav-item">
-					<a class="nav-link" href="#">Coach</a>
+					<a class="nav-link" href="coaches">Coach</a>
 					</li>
 					<li class="nav-item">
 					<a class="nav-link" href="#">Categories</a>
@@ -70,103 +70,102 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 				</div>
 			</div>
 		</nav>
-
 		<!--END OF NAVIGATION BAR-->
 
-<!--DISPLAY COURTS-->
-<div >
-	<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-	<div class="carousel-indicators">
-		<?php
-		// Your database connection code here
-		include "userdb.php";
-		// Your query here
-		$query = "SELECT court.court_id, court.court_name, court.court_image, users.fname, users.lname FROM court JOIN users ON court.user_ID = users.user_id";
+		<!--DISPLAY COURTS-->
+		<div >
+			<div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+			<div class="carousel-indicators">
+				<?php
+				// Your database connection code here
+				include "userdb.php";
+				// Your query here
+				$query = "SELECT court.court_id, court.court_name, court.court_image, users.fname, users.lname FROM court INNER JOIN users ON court.user_ID = users.user_id INNER JOIN review_court ON review_court.court_id = court.court_id GROUP BY court.court_id, court.court_name, court.court_image, users.fname, users.lname HAVING AVG(review_court.rate) >= 3.8 ORDER BY AVG(review_court.rate) DESC";
 
-		// Execute the query
-		$result = mysqli_query($conn, $query);
+				// Execute the query
+				$result = mysqli_query($conn, $query);
 
-		// Check if the query was successful
-		if ($result) {
-			// Loop through the results and display the indicators
-			$count = 0;
-			while ($row = mysqli_fetch_assoc($result)) {
-			$active = "";
-			if ($count == 0) {
-				$active = "active";
-			}
-		?>
-			<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="<?php echo $count; ?>" class="<?php echo $active; ?>" aria-label="Slide <?php echo $count+1; ?>" aria-current="<?php echo $count == 0 ? 'true' : 'false'; ?>"></button>
-		<?php
-			$count++;
-			}
-			// Free result set
-			mysqli_free_result($result);
-		} else {
-			echo "Error: " . mysqli_error($conn);
-		}
+				// Check if the query was successful
+				if ($result) {
+					// Loop through the results and display the indicators
+					$count = 0;
+					while ($row = mysqli_fetch_assoc($result)) {
+					$active = "";
+					if ($count == 0) {
+						$active = "active";
+					}
+				?>
+					<button type="button" data-bs-target="#myCarousel" data-bs-slide-to="<?php echo $count; ?>" class="<?php echo $active; ?>" aria-label="Slide <?php echo $count+1; ?>" aria-current="<?php echo $count == 0 ? 'true' : 'false'; ?>"></button>
+				<?php
+					$count++;
+					}
+					// Free result set
+					mysqli_free_result($result);
+				} else {
+					echo "Error: " . mysqli_error($conn);
+				}
 
-		// Close the database connection
-		mysqli_close($conn);
-		?>
-	</div>
-
-	<div class="carousel-inner">
-		<?php
-		// Your database connection code here
-		include "userdb.php";
-		// Your query here
-		$query = "SELECT court.court_id, court.court_name, court.court_image, users.fname, users.lname FROM court JOIN users ON court.user_ID = users.user_id";
-
-		// Execute the query
-		$result = mysqli_query($conn, $query);
-
-		// Check if the query was successful
-		if ($result) {
-			// Loop through the results and display them
-			$count = 0;
-			while ($row = mysqli_fetch_assoc($result)) {
-			$active = "";
-			if ($count == 0) {
-				$active = "active";
-			}
-		?>
-			<div class="carousel-item <?php echo $active; ?>">
-				<img src="<?php echo $row['court_image']; ?>" class="d-block w-100 crop-img" alt="<?php echo $row['court_name']; ?>">
-				<div class="container">
-				<div class="carousel-caption text-start">
-					<h1><?php echo $row['court_name']; ?></h1>
-					<p>Owned by <?php echo $row['fname'].' '.$row['lname']; ?></p>
-					<p><a class="btn btn-lg btn-primary" href="view-court?id=<?php echo $row['court_id']; ?>">View Court</a></p>
-				</div>
-				</div>
+				// Close the database connection
+				mysqli_close($conn);
+				?>
 			</div>
-		<?php
-			$count++;
-			}
-			// Free result set
-			mysqli_free_result($result);
-		} else {
-			echo "Error: " . mysqli_error($conn);
-		}
 
-		// Close the database connection
-		mysqli_close($conn);
-		?>
-	</div>
+			<div class="carousel-inner">
+				<?php
+				// Your database connection code here
+				include "userdb.php";
+				// Your query here
+				$query = "SELECT court.court_id, court.court_name, court.court_image, users.fname, users.lname FROM court INNER JOIN users ON court.user_ID = users.user_id INNER JOIN review_court ON review_court.court_id = court.court_id GROUP BY court.court_id, court.court_name, court.court_image, users.fname, users.lname HAVING AVG(review_court.rate) >= 3.8 ORDER BY AVG(review_court.rate) DESC";
 
-	<button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-		<span class="visually-hidden">Previous</span>
-	</button>
-		<button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-		<span class="carousel-control-next-icon" aria-hidden="true"></span>
-		<span class="visually-hidden">Next</span>
-		</button>
-	</div>
-</div>
+				// Execute the query
+				$result = mysqli_query($conn, $query);
 
-<!--END OF DISPLAY-->
+				// Check if the query was successful
+				if ($result) {
+					// Loop through the results and display them
+					$count = 0;
+					while ($row = mysqli_fetch_assoc($result)) {
+					$active = "";
+					if ($count == 0) {
+						$active = "active";
+					}
+				?>
+					<div class="carousel-item <?php echo $active; ?>">
+						<img src="<?php echo $row['court_image']; ?>" class="d-block w-100 crop-img" alt="<?php echo $row['court_name']; ?>">
+						<div class="container">
+						<div class="carousel-caption text-start">
+							<h1><?php echo $row['court_name']; ?></h1>
+							<p>Owned by <?php echo $row['fname'].' '.$row['lname']; ?></p>
+							<p><a class="btn btn-lg btn-primary" href="view-court?id=<?php echo $row['court_id']; ?>">View Court</a></p>
+						</div>
+						</div>
+					</div>
+				<?php
+					$count++;
+					}
+					// Free result set
+					mysqli_free_result($result);
+				} else {
+					echo "Error: " . mysqli_error($conn);
+				}
+
+				// Close the database connection
+				mysqli_close($conn);
+				?>
+			</div>
+
+			<button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+				<button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+				</button>
+			</div>
+		</div>
+
+		<!--END OF DISPLAY-->
 
 		<!--JAVASCRIPT AREA-->
 		<script>
