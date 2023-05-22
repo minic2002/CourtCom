@@ -11,14 +11,14 @@ ob_start(); // Start output buffering
 			<a class="navbar-brand" href="dashboard"><img src="static/images/CourtCom_Logo_more_stroke.png" width="135"></a>
 				<!-- Left side of navbar -->
 				<div class="navbar-nav me-auto">
-					<a class="nav-link active nav-link-hover" aria-current="page" href="/CourtCom">Home</a>
+					<a class="nav-link active nav-link-hover" aria-current="page" href="#">Home</a>
 					<a class="nav-link active nav-link-hover" aria-current="page" href="#About">About Us</a>
 				</div>
 
 				<!-- Right side of navbar -->
 				<div class="navbar-nav ms-auto">
 					<a class="nav-link active nav-link-hover" aria-current="page" href="login">Login</a>
-					<a class="nav-link active sign-up" aria-current="page" href="signup">Sign Up</a>
+					<a class="nav-link active nav-link-hover" aria-current="page" href="signup">Sign Up</a>
 				</div>
 			</div>
 		</nav>

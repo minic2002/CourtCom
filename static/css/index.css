@@ -155,7 +155,8 @@ p{
   }
   #Coach .image-column {
 	display: flex;
-
+	height: 100%;
+	
 }
 
 
@@ -167,7 +168,8 @@ p{
 #Coach .description-column {
 	padding: 20px;
 	background-color: #fcde67;
-	height: 50%;
+	height: 100%;
+	
 }
 
 #Coach .description-column h2 {

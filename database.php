@@ -199,7 +199,7 @@ if (isset($_POST["bo_court"])) {
     if (mysqli_stmt_affected_rows($stmt) > 0) {
         // Retrieve the booked court ID
         $query = "SELECT book_court.bcrt_id FROM book_court INNER JOIN users ON book_court.user_id = users.user_id INNER JOIN court ON book_court.court_id = court.court_id WHERE book_court.court_id = '$court_id' AND book_court.user_id = '$user_id'";
-        $resulta = mysqli_query($conn, $sql);
+        $resulta = mysqli_query($conn, $query);
 
         if ($resulta && mysqli_num_rows($resulta) > 0) {
                 $book_court = mysqli_fetch_assoc($resulta);

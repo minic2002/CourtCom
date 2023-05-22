@@ -98,9 +98,7 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
         mysqli_close($conn);
         ?>
         <!--END OF BOOKINGS TABLE-->
-
-
-        
+       
         <!--JAVASCRIPT-->
         <script>
                 function toggleSideMenu() {
