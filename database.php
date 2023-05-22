@@ -154,21 +154,6 @@ if (isset($_POST["regcourt"])) {
     mysqli_stmt_bind_param($stmt, "ssssssss", $user_id, $court_name, $uploadFile, $court_address, $court_desc, $court_type, $rph, $availability);
     mysqli_stmt_execute($stmt);
 
-    if (mysqli_stmt_affected_rows($stmt) > 0) {
-        $queer = "SELECT * FROM court WHERE user_id = '$user_id'";
-        $result = mysqli_query($conn, $queer);
-
-        if ($result && mysqli_num_rows($result) > 0) {
-            $court = mysqli_fetch_assoc($result);
-            $_SESSION["court_id"] = $court["court_id"];
-            $_SESSION["court_name"] = $court["court_name"];
-            $_SESSION["court_image"] = $court["court_image"];
-            $_SESSION["court_address"] = $court["court_address"];
-            $_SESSION["court_desc"] = $court["court_desc"];
-            $_SESSION["court_type"] = $court["court_type"];
-            $_SESSION["rph"] = $court["rph"];
-        }
-    }
     //redirect to dashboard_court
     header("Location: dashboard_court");
     exit();

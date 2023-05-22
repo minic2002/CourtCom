@@ -19,11 +19,6 @@
   }
 /* end of center card*/
 
-body {
-    background: -webkit-linear-gradient(60deg, #fcde67 100%, #5BCCF6 100%);
-    background: linear-gradient(60deg, #fcde67, #5BCCF6);
-    background-size: 100% 100%;
-}
 .sidebar {
     position: fixed;
     height: 100%;
