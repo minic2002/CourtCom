@@ -79,7 +79,7 @@ if ($_SESSION["usertype"] == "User" || $_SESSION["usertype"] == "Coach") {
       	<header>
             <nav class="navbar navbar-expand-lg navbar-light bg-light">
                 <div class="container-fluid">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis fugit ducimus voluptate voluptates suscipit totam excepturi id ad necessitatibus eum eaque animi adipisci, odit pariatur eius. Ratione autem aliquid quo.
+                <h3>Bookings</h3>
 					
                 </div>
             </nav>
