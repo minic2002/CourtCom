@@ -1,6 +1,5 @@
 <?php
-session_start();
-include "userdb.php";
+include "database.php";
 
 // Check if user is logged in
 if (!isset($_SESSION["user_id"])) {
@@ -8,31 +7,33 @@ if (!isset($_SESSION["user_id"])) {
     exit();
 }
 
-if ($_SESSION["usertype"] == "User" || $_SESSION["usertype"] == "Coach") {
-    if ($_SESSION["usertype"] == "User") {
+if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "User") {
+    if ($_SESSION["usertype"] == "Court Owner") {
+        header("Location: dashboard_court");
+    } elseif ($_SESSION["usertype"] == "User") {
         header("Location: dashboard");
-    } elseif ($_SESSION["usertype"] == "Coach") {
-        header("Location: dashboard_coach");
     }
     exit();
 }
 
 $user_id = $_SESSION["user_id"];
-$query = "SELECT court_id FROM court WHERE court.user_ID = '$user_id'";
+$query = "SELECT coach_id FROM coach WHERE coach.user_ID = '$user_id'";
 $result = mysqli_query($conn, $query);
 
 if (mysqli_num_rows($result) == 1) {
-    // Display the number of bookings on a particular court
-    $court = mysqli_fetch_assoc($result);
-    $court_id = $court["court_id"];
+	// Display the number of bookings on a particular coach
+	$coach = mysqli_fetch_assoc($result);
+	$coach_id = $coach["coach_id"];
+
 }
 
 ?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8">
-    <title>CourtCom | Court Owner Dashboard</title>
+    <title>CourtCom | Coach Dashboard</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -105,7 +106,7 @@ if (mysqli_num_rows($result) == 1) {
         </header>
         <div class="home-content">
       <?php
-      $sql = "SELECT book_court.bcrt_id, users.fname, users.lname, book_court.Start_Time, book_court.End_Time, book_court.Booking_Date, pay_booked_court.payment_type, pay_booked_court.payment_amount, pay_booked_court.payment_status FROM book_court INNER JOIN pay_booked_court ON pay_booked_court.bcrt_id = book_court.bcrt_id INNER JOIN users ON book_court.user_id = users.user_id WHERE book_court.court_id = '$court_id' AND book_court.Booking_Status = 'Accept'";
+      $sql = "SELECT book_coach.bcch_id, users.fname, users.lname, book_coach.Start_Time, book_coach.End_Time, book_coach.Booking_Date, pay_booked_coach.payment_type, pay_booked_coach.payment_amount, pay_booked_coach.payment_status FROM book_coach INNER JOIN pay_booked_coach ON pay_booked_coach.bcch_id = book_coach.bcch_id INNER JOIN users ON book_coach.user_id = users.user_id WHERE book_coach.coach_id = '$coach_id' AND book_coach.Booking_Status = 'Accept'";
       $result = mysqli_query($conn, $sql);
       ?>
 
@@ -128,7 +129,7 @@ if (mysqli_num_rows($result) == 1) {
         <?php
         $count = 1;
         while ($row = mysqli_fetch_assoc($result)) {
-          $bcrt_id = $row['bcrt_id'];
+          $bcrt_id = $row['bcch_id'];
           $fname = $row['fname'];
           $lname = $row['lname'];
           $start_time = $row['Start_Time'];

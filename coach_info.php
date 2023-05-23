@@ -29,7 +29,7 @@ if ($_SESSION["usertype"] == "Coach") {
     }
 }
 ?>
-?>
+
 
 <!DOCTYPE html>
 <html>

@@ -16,10 +16,10 @@
       exit();
   }
 
-  include "userdb.php";
+  include "userdb.php";//
 
     $bcrt_id = $_GET['id'];
-    $stmt = mysqli_prepare($conn, "UPDATE pay_booked_court SET payment_Status = 'Paid' WHERE bcrt_id = ?");
+    $stmt = mysqli_prepare($conn, "DELETE FROM book_court WHERE bcrt_id = ?");
     mysqli_stmt_bind_param($stmt, "i", $bcrt_id);
     mysqli_stmt_execute($stmt);
 
@@ -27,8 +27,4 @@
         header("Location: court-bookings");
         exit();
     } 
-    else {
-        header("Location: court-bookings");
-        exit();
-    }
 ?>
