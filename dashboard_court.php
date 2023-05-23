@@ -57,8 +57,6 @@
           $Accepted_Requests = mysqli_fetch_assoc($result4);
       }
   }
-
-
 ?>
 
 <!DOCTYPE html>
@@ -73,9 +71,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="static/css/dashboard_court.css">
   </head>
@@ -112,10 +108,17 @@
             <span class="links_name">Settings</span>
           </a>
         </li>
+        <li>
+          <a href="logout">
+          <i class='bx bx-log-out'></i>
+            <span class="links_name">Logout</span>
+          </a>
+        </li>
+        
         <li class="log_out">
-          <a href="home.html">
-            <i class='bx bx-log-out'></i>
-            <span class="links_name">Home</span>
+          <a>
+            <img src="<?php echo $_SESSION['user_pic']; ?>" class="rounded-circle me-3 kuwan" width="50" height="50" alt="<?php echo $_SESSION['fname'] . ' ' . $_SESSION['lname']; ?>">
+            <span class="links_name"><?php echo $_SESSION['fname'] . ' ' . $_SESSION['lname']; ?></span>
           </a>
         </li>
       </ul>
@@ -128,52 +131,84 @@
               </div>
           </nav>
       </header>
-        <div class="home-content">
-          <div class="container mt-5">
-              <div class="row row-centered">
-                <div class="col-md-2">
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">Total Bookings</h5>
-                      <p class="card-text"><?php echo $book_count['total_bookings']; ?></p>
-                    </div>
+      <div class="home-content">
+        <div class="container mt-5">
+            <div class="row row-centered">
+              <div class="col-md-2">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Total Bookings</h5>
+                    <p class="card-text"><?php echo $book_count['total_bookings']; ?></p>
                   </div>
                 </div>
-                <div class="col-md-2">
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">Total Ratings</h5>
-                      <p class="card-text"><?php echo $total_rating["total_rating"]; ?></p>
-                    </div>
+              </div>
+              <div class="col-md-2">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Total Ratings</h5>
+                    <p class="card-text"><?php echo $total_rating["total_rating"]; ?></p>
                   </div>
                 </div>
-                <div class="col-md-2">
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">Total Reviews</h5>
-                      <p class="card-text"><?php echo $total_reviews["total_reviews"]?></p>
-                    </div>
+              </div>
+              <div class="col-md-2">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Total Reviews</h5>
+                    <p class="card-text"><?php echo $total_reviews["total_reviews"]?></p>
                   </div>
                 </div>
-                <div class="col-md-2">
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">Pending Requests</h5>
-                      <p class="card-text"><?php echo $Pending_Requests["Pending_Requests"]; ?></p>
-                    </div>
+              </div>
+              <div class="col-md-2">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Pending Requests</h5>
+                    <p class="card-text"><?php echo $Pending_Requests["Pending_Requests"]; ?></p>
                   </div>
                 </div>
-                <div class="col-md-2">
-                  <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">Accepted Requests</h5>
-                      <p class="card-text"><?php echo $Accepted_Requests["Accepted_Requests"]?></p>
-                    </div>
+              </div>
+              <div class="col-md-2">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">Accepted Requests</h5>
+                    <p class="card-text"><?php echo $Accepted_Requests["Accepted_Requests"]?></p>
                   </div>
                 </div>
-            </div>
+              </div>
           </div>
+        </div>
       </div>
+      <div class="container"><hr style="height: 2px;background-color: grey;"></div>
+      <div class="container">
+      <h3 style="text-align: center;">Ratings and Reviews</h3>
+       <!--Display ratings and reviews-->
+       <?php
+            $query = "SELECT users.user_pic, users.fname, users.lname, review_court.review_text, review_court.rate, review_court.review_date FROM review_court JOIN users ON review_court.user_id = users.user_id WHERE review_court.court_id = '$court_id' ORDER BY review_court.rate DESC";
+            $result = mysqli_query($conn, $query);
+
+            if ($result && mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo '<div class="card mt-3" style="width: 97%;">';
+                    echo '<div class="card-body">';
+                    echo '<div class="d-flex align-items-center">';
+                    echo '<img src="'.$row['user_pic'].'" class="rounded-circle me-3" width="55" height="55" alt=" '.$row['fname'].' '.$row['lname']. ' ">';
+                    echo '<div>';
+                    echo '<h5 class="card-title mb-0">'.$row['fname'].' '.$row['lname']. ' ' . '<span class="fa fa-star"></span> ' . $row['rate'] . '</h5>';
+                    echo '<h6 class="text-muted">'.$row['review_date'].'</h6>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '<div class="mt-3">';
+                    echo '<h4 class="card-text">'.$row['review_text'].'</h4>';
+                    echo '</div>';
+                    echo '</div>';
+                    echo '</div>';
+                }
+            } else {
+                echo '<br><br><h5 class="text-center">No ratings and reviews available.</h5> <br><br>';
+            }
+        ?>
+        <!--End of displaying-->
+      </div>
+
     </section>
 
     <script>
@@ -186,5 +221,7 @@
         } else sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
       }
     </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
   </body>
 </html>

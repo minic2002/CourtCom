@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "userdb.php";
 
 // Check if user is logged in
 if (!isset($_SESSION["user_id"])) {
@@ -15,6 +16,17 @@ if ($_SESSION["usertype"] == "User" || $_SESSION["usertype"] == "Coach") {
     }
     exit();
 }
+
+$user_id = $_SESSION["user_id"];
+$query = "SELECT court_id FROM court WHERE court.user_ID = '$user_id'";
+$result = mysqli_query($conn, $query);
+
+if (mysqli_num_rows($result) == 1) {
+    // Display the number of bookings on a particular court
+    $court = mysqli_fetch_assoc($result);
+    $court_id = $court["court_id"];
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
@@ -28,6 +40,7 @@ if ($_SESSION["usertype"] == "User" || $_SESSION["usertype"] == "Coach") {
     <meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
@@ -67,27 +80,95 @@ if ($_SESSION["usertype"] == "User" || $_SESSION["usertype"] == "Coach") {
             <span class="links_name">Settings</span>
           </a>
         </li>
+        <li>
+          <a href="logout">
+          <i class='bx bx-log-out'></i>
+            <span class="links_name">Logout</span>
+          </a>
+        </li>
+        
         <li class="log_out">
-          <a href="home.html">
-            <i class='bx bx-log-out'></i>
-            <span class="links_name">Home</span>
+          <a>
+            <img src="<?php echo $_SESSION['user_pic']; ?>" class="rounded-circle me-3 kuwan" width="50" height="50" alt="<?php echo $_SESSION['fname'] . ' ' . $_SESSION['lname']; ?>">
+            <span class="links_name"><?php echo $_SESSION['fname'] . ' ' . $_SESSION['lname']; ?></span>
           </a>
         </li>
       </ul>
     </div>
     <section class="home-section">
-      	<header>
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <div class="container-fluid">
-                  <h3>Booking Requests</h3>
-					
-                </div>
-            </nav>
+      <header>
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+              <div class="container-fluid">
+                <h3>Booking Requests</h3>
+        
+              </div>
+          </nav>
+      </header>
+      <div class="home-content">
+      <?php
+      $sql = "SELECT book_court.bcrt_id, users.fname, users.lname, book_court.Start_Time, book_court.End_Time, book_court.Booking_Date, pay_booked_court.payment_type, pay_booked_court.payment_amount FROM book_court INNER JOIN pay_booked_court ON pay_booked_court.bcrt_id = book_court.bcrt_id INNER JOIN users ON book_court.user_id = users.user_id WHERE book_court.court_id = '$court_id' AND book_court.Booking_Status = 'Pending'";
+      $result = mysqli_query($conn, $sql);
+      ?>
 
-        </header>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Booking ID</th>
+          <th scope="col">User Name</th>
+          <th scope="col">Start Time</th>
+          <th scope="col">End Time</th>
+          <th scope="col">Booking Date</th>
+          <th scope="col">Payment Type</th>
+          <th scope="col">Payment Amount</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+        $count = 1;
+        while ($row = mysqli_fetch_assoc($result)) {
+          $bcrt_id = $row['bcrt_id'];
+          $fname = $row['fname'];
+          $lname = $row['lname'];
+          $start_time = $row['Start_Time'];
+          $end_time = $row['End_Time'];
+          $booking_date = $row['Booking_Date'];
+          $payment_type = $row['payment_type'];
+          $payment_amount = $row['payment_amount'];
+        ?>
+        <tr>
+          <th scope="row"><?php echo $count; ?></th>
+          <td><?php echo $bcrt_id; ?></td>
+          <td><?php echo $fname . " " . $lname; ?></td>
+          <td><?php echo $start_time; ?></td>
+          <td><?php echo $end_time; ?></td>
+          <td><?php echo $booking_date; ?></td>
+          <td><?php echo $payment_type; ?></td>
+          <td><?php echo $payment_amount; ?></td>
+          <td>
+          <button class="btn btn-success" title="Accept" onclick='court_accept_book("<?php $bcrt_id; ?>")'>
+              <i class="fa fa-check"></i>
+            </button>
+            <button class="btn btn-danger" title="Decline">
+              <i class="fa fa-times"></i>
+            </button> 
+          </td>
+        </tr>
+        <?php
+          $count++;
+        }
+        ?>
+      </tbody>
+    </table>
+      </div>
 
- 
     </section>
+    <script>
+      function court_accept_book(bcrt_id){
+        location.href="court-accept-book?id="+bcrt_id;
+      }
+    </script>
     <script>
       let sidebar = document.querySelector(".sidebar");
       let sidebarBtn = document.querySelector(".sidebarBtn");

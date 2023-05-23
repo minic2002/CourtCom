@@ -5,11 +5,23 @@
     src: url(../Inter/static/Inter-Regular.ttf);
   }
 
+/* hidden scrollbar */
+
+/* For WebKit based browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+    width: 0.0em; /*Set a width for the scrollbar (optional) */
+  }
+  /* end hidden */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: Inter;
+}
+
+.kuwan {
+      object-fit: cover;
 }
 
 /* center card  */
@@ -55,6 +67,7 @@
     color: #000000!important;
 }
 
+
 .sidebar .nav-links li a:hover {
     background: #FFFFFF!important;
     color: #000000!important;
@@ -65,6 +78,12 @@
     text-align: center;
     font-size: 18px;
     color: #fff;
+}
+
+.sidebar .nav-links li img {
+    text-align: center;
+    object-fit: cover;
+
 }
 
 .sidebar .nav-links li a .links_name {
@@ -124,6 +143,10 @@
 
 nav .sidebar-button i {
     font-size: 35px;
+    margin-right: 10px;
+}
+
+nav .sidebar-button img {
     margin-right: 10px;
 }
 
