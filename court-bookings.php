@@ -167,7 +167,12 @@ if (mysqli_num_rows($result) == 1) {
       </div>
  
     </section>
+    
     <script>
+      function court_accept_book(bcrt_id){
+        location.href="court-accept-book?id="+bcrt_id;
+      }
+
       let sidebar = document.querySelector(".sidebar");
       let sidebarBtn = document.querySelector(".sidebarBtn");
       sidebarBtn.onclick = function() {

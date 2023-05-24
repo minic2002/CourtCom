@@ -147,10 +147,10 @@ if (mysqli_num_rows($result) == 1) {
           <td><?php echo $payment_type; ?></td>
           <td><?php echo $payment_amount; ?></td>
           <td>
-          <button class="btn btn-success" title="Accept" onclick='court_accept_book("<?php $bcrt_id; ?>")'>
+          <button class="btn btn-success" title="Accept" onclick="court_accept_book('<?php echo $bcrt_id; ?>')">
               <i class="fa fa-check"></i>
             </button>
-            <button class="btn btn-danger" title="Decline">
+            <button class="btn btn-danger" title="Decline" onclick="court_decline_book('<?php echo $bcrt_id; ?>')">
               <i class="fa fa-times"></i>
             </button> 
           </td>
@@ -167,6 +167,9 @@ if (mysqli_num_rows($result) == 1) {
     <script>
       function court_accept_book(bcrt_id){
         location.href="court-accept-book?id="+bcrt_id;
+      }
+      function court_decline_book(bcrt_id){
+        location.href="court-decline-book?id="+bcrt_id;
       }
     </script>
     <script>

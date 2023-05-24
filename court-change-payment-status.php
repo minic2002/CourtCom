@@ -19,7 +19,7 @@
   include "userdb.php";
 
     $bcrt_id = $_GET['id'];
-    $stmt = mysqli_prepare($conn, "UPDATE book_court SET Booking_Status = 'Accept' WHERE bcrt_id = ?");
+    $stmt = mysqli_prepare($conn, "UPDATE pay_booked_court SET payment_Status = 'Decline' WHERE bcrt_id = ?");
     mysqli_stmt_bind_param($stmt, "i", $bcrt_id);
     mysqli_stmt_execute($stmt);
 
