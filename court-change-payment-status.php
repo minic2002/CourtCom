@@ -16,7 +16,6 @@
       exit();
   }
 
-  include "userdb.php";
 
     $bcrt_id = $_GET['id'];
     $stmt = mysqli_prepare($conn, "UPDATE pay_booked_court SET payment_Status = 'Paid' WHERE bcrt_id = ?");

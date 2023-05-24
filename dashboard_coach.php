@@ -25,7 +25,7 @@ if (mysqli_num_rows($result) == 1) {
 	$coach = mysqli_fetch_assoc($result);
 	$coach_id = $coach["coach_id"];
 
-	$sql = "SELECT COUNT(book_coach.coach_id) AS total_bookings FROM book_coach INNER JOIN USERS ON book_coach.user_id = users.user_id INNER JOIN COACH ON book_coach.coach_id = coach.coach_id WHERE book_coach.coach_id = '$coach_id'";
+	$sql = "SELECT COUNT(book_coach.coach_id) AS total_bookings FROM book_coach INNER JOIN USERS ON book_coach.user_id = users.user_id INNER JOIN COACH ON book_coach.coach_id = coach.coach_id WHERE book_coach.coach_id = '$coach_id' AND (book_coach.Booking_Status= 'Pending' OR book_coach.Booking_Status='Accept')";
 	$result = mysqli_query($conn, $sql);
 
 	if ($result && mysqli_num_rows($result) > 0) {

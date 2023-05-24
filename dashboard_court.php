@@ -25,7 +25,7 @@
       $court = mysqli_fetch_assoc($result);
       $court_id = $court["court_id"];
 
-      $sql = "SELECT COUNT(book_court.court_id) AS total_bookings FROM book_court INNER JOIN USERS ON book_court.user_id = users.user_id INNER JOIN COURT ON book_court.court_id = court.court_ID WHERE book_court.court_id = '$court_id'";
+      $sql = "SELECT COUNT(book_court.court_id) AS total_bookings FROM book_court INNER JOIN USERS ON book_court.user_id = users.user_id INNER JOIN COURT ON book_court.court_id = court.court_ID WHERE book_court.court_id = '$court_id' AND (book_court.Booking_Status= 'Pending' OR book_court.Booking_Status='Accept')";
       $result = mysqli_query($conn, $sql);
 
       if ($result && mysqli_num_rows($result) > 0) {

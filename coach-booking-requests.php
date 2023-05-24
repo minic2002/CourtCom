@@ -63,13 +63,13 @@ if (mysqli_num_rows($result) == 1) {
           </a>
         </li>
         <li>
-          <a href="#" class="active">
+          <a href="coach-bookings">
             <i class='bx bx-list-ul'></i>
             <span class="links_name">Bookings</span>
           </a>
         </li>
         <li>
-          <a href="coach-booking-requests">
+          <a href="#" class="active">
             <i class='bx bx-coin-stack'></i>
             <span class="links_name">Requests</span>
           </a>
@@ -106,7 +106,7 @@ if (mysqli_num_rows($result) == 1) {
         </header>
         <div class="home-content">
       <?php
-      $sql = "SELECT book_coach.bcch_id, users.fname, users.lname, book_coach.Start_Time, book_coach.End_Time, book_coach.Booking_Date, pay_booked_coach.payment_type, pay_booked_coach.payment_amount, pay_booked_coach.payment_status FROM book_coach INNER JOIN pay_booked_coach ON pay_booked_coach.bcch_id = book_coach.bcch_id INNER JOIN users ON book_coach.user_id = users.user_id WHERE book_coach.coach_id = '$coach_id' AND book_coach.Booking_Status = 'Accept'";
+      $sql = "SELECT book_coach.bcch_id, users.fname, users.lname, book_coach.Start_Time, book_coach.End_Time, book_coach.Booking_Date, pay_booked_coach.payment_type, pay_booked_coach.payment_amount FROM book_coach INNER JOIN pay_booked_coach ON pay_booked_coach.bcch_id = book_coach.bcch_id INNER JOIN users ON book_coach.user_id = users.user_id WHERE book_coach.coach_id = '$coach_id' AND book_coach.Booking_Status = 'Pending'";
       $result = mysqli_query($conn, $sql);
       ?>
 
@@ -121,7 +121,6 @@ if (mysqli_num_rows($result) == 1) {
           <th scope="col">Booking Date</th>
           <th scope="col">Payment Type</th>
           <th scope="col">Payment Amount</th>
-          <th scope="col">Payment Status</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
@@ -137,7 +136,6 @@ if (mysqli_num_rows($result) == 1) {
           $booking_date = $row['Booking_Date'];
           $payment_type = $row['payment_type'];
           $payment_amount = $row['payment_amount'];
-          $payment_status = $row['payment_status'];
         ?>
         <tr>
           <th scope="row"><?php echo $count; ?></th>
@@ -148,15 +146,13 @@ if (mysqli_num_rows($result) == 1) {
           <td><?php echo $booking_date; ?></td>
           <td><?php echo $payment_type; ?></td>
           <td><?php echo $payment_amount; ?></td>
-          <td><?php echo $payment_status; ?>
-          <button class="btn btn-success" title="Change Payment Status" onclick="coach_change_payment_status('<?php echo $bcch_id; ?>')">
-            <i class="fa fa-exchange"></i>
-          </button>
-          </td>
           <td>
-            <button class="btn btn-danger" title="Delete Booking" onclick="coach_delete_book('<?php echo $bcch_id; ?>')">
-              <i class="fa fa-times"></i>
+          <button class="btn btn-success" title="Accept" onclick="coach_accept_book('<?php echo $bcch_id; ?>')">
+              <i class="fa fa-check"></i>
             </button>
+            <button class="btn btn-danger" title="Decline" onclick="coach_decline_book('<?php echo $bcch_id; ?>')">
+              <i class="fa fa-times"></i>
+            </button> 
           </td>
         </tr>
         <?php
@@ -170,12 +166,12 @@ if (mysqli_num_rows($result) == 1) {
     </section>
     
     <script>
-      function coach_change_payment_status(bcch_id){
-        location.href="coach-change-payment-status?id="+bcch_id;
+      function coach_accept_book(bcch_id){
+        location.href="coach-accept-book?id="+bcch_id;
       }
 
-      function coach_delete_book(bcch_id){
-        location.href="coach-delete-book?id="+bcch_id;
+      function coach_decline_book(bcch_id){
+        location.href="coach-decline-book?id="+bcch_id;
       }
 
       let sidebar = document.querySelector(".sidebar");

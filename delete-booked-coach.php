@@ -20,17 +20,17 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 
 include "userdb.php";
 
-$bcrt_id = $_GET['id'];
+$bcch_id = $_GET['id'];
 
-$stmt = mysqli_prepare($conn, "DELETE FROM book_court WHERE bcrt_id = ?");
-mysqli_stmt_bind_param($stmt, "i", $bcrt_id);
+$stmt = mysqli_prepare($conn, "DELETE FROM book_coach WHERE bcch_id = ?");
+mysqli_stmt_bind_param($stmt, "i", $bcch_id);
 mysqli_stmt_execute($stmt);
 
 if (mysqli_affected_rows($conn) > 0) {
-    header("Location: bookings");
+    header("Location: user-booking-coach");
     exit();
 } else {
-    header("Location: bookings");
+    header("Location: user-booking-coach");
     exit();
 }
 

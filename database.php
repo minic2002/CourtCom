@@ -309,7 +309,7 @@ if (isset($_POST["pabo_coach"])) {
     mysqli_stmt_execute($stmt);
 
     if (mysqli_stmt_affected_rows($stmt) > 0) {
-        header("Location: bookings");
+        header("Location: user-booking-coach");
         exit();
     }
 }

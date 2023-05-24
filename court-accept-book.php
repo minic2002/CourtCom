@@ -16,8 +16,6 @@
       exit();
   }
 
-  include "userdb.php";
-
     $bcrt_id = $_GET['id'];
     $stmt = mysqli_prepare($conn, "UPDATE book_court SET Booking_Status = 'Accept' WHERE bcrt_id = ?");
     mysqli_stmt_bind_param($stmt, "i", $bcrt_id);

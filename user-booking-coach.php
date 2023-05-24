@@ -72,23 +72,24 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 
         include "userdb.php";
 
-        $query = "SELECT book_court.bcrt_id, court.court_name, book_court.Start_Time, book_court.End_Time, book_court.Booking_Date, book_court.Booking_Status, pay_booked_court.payment_status FROM book_court INNER JOIN court ON book_court.court_id = court.court_ID INNER JOIN pay_booked_court ON pay_booked_court.bcrt_id = book_court.bcrt_id WHERE book_court.user_id = {$_SESSION['user_id']}";
+        $query = "SELECT book_coach.bcch_id, users.fname, users.lname, book_coach.Start_Time, book_coach.End_Time, book_coach.Booking_Date, book_coach.Booking_Status, pay_booked_coach.payment_amount, pay_booked_coach.payment_status FROM book_coach INNER JOIN coach ON book_coach.coach_id = coach.coach_ID INNER JOIN pay_booked_coach ON pay_booked_coach.bcch_id = book_coach.bcch_id INNER JOIN users ON users.user_id = coach.user_id WHERE book_coach.user_id = {$_SESSION['user_id']}";
         $result = mysqli_query($conn, $query);
 
         if ($result) {
             echo '<table class="table table-striped">';
-            echo '<thead><tr><th scope="col">Booking ID</th><th scope="col">Court Name</th><th scope="col">Start Time</th><th scope="col">End Time</th><th scope="col">Booking Date</th><th scope="col">Booking Status</th><th scope="col">Payment Status</th><th scope="col">Action</th></tr></thead><tbody>';
+            echo '<thead><tr><th scope="col">Booking ID</th><th scope="col">Coach Name</th><th scope="col">Start Time</th><th scope="col">End Time</th><th scope="col">Booking Date</th><th scope="col">Booking Status</th><th scope="col">Payment Amount</th><th scope="col">Payment Status</th><th scope="col">Action</th></tr></thead><tbody>';
 
             while ($row = mysqli_fetch_assoc($result)) {
             echo '<tr>';
-            echo '<td>' . $row['bcrt_id'] . '</td>';
-            echo '<td>' . $row['court_name'] . '</td>';
+            echo '<td>' . $row['bcch_id'] . '</td>';
+            echo '<td>' . $row['fname'] . " " . $row['lname'] . '</td>';
             echo '<td>' . $row['Start_Time'] . '</td>';
             echo '<td>' . $row['End_Time'] . '</td>';
             echo '<td>' . $row['Booking_Date'] . '</td>';
             echo '<td>' . $row['Booking_Status'] . '</td>';
+            echo '<td>' . $row['payment_amount'] . '</td>';
             echo '<td>' . $row['payment_status'] . '</td>';
-            echo '<td> <button onclick="delete_booked_court(' . $row['bcrt_id'] . ')"> <i class="fa fa-trash"></i> </button></td>';
+            echo '<td> <button onclick="delete_booked_coach(' . $row['bcch_id'] . ')"> <i class="fa fa-trash"></i> </button></td>';
             echo '</tr>';
             }
             echo '</tbody></table>';
@@ -111,10 +112,10 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
                         }
                     });
                 }
-                function delete_booked_court(bcrt_id){
-                    var ok = confirm("Do you want to cancel your booking to this particular court?")
+                function delete_booked_coach(bcch_id){
+                    var ok = confirm("Do you want to cancel your booking to this particular coach?")
                     if (ok){
-                        location.href="delete-booked-court?id="+bcrt_id;
+                        location.href="delete-booked-coach?id="+bcch_id;
                     }
                     idno="";
                 }
