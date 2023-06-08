@@ -16,6 +16,19 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "User") {
     exit();
 }
 
+// Check if user is a coach
+if ($_SESSION["usertype"] == "Coach") {
+  // Check if coach information form has already been submitted
+  $user_id = $_SESSION["user_id"];
+  $sql = "SELECT * FROM coach WHERE user_id = '$user_id'";
+  $result = $conn->query($sql);
+  if ($result->num_rows == 0) {
+      // Coach information form has already been submitted, redirect to dashboard_coach
+      header("Location: coach_info");
+      exit();
+  }
+}
+
 $user_id = $_SESSION["user_id"];
 $query = "SELECT coach_id FROM coach WHERE coach.user_ID = '$user_id'";
 $result = mysqli_query($conn, $query);

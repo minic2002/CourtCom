@@ -16,6 +16,19 @@
       exit();
   }
 
+  // Check if user is a coach
+if ($_SESSION["usertype"] == "Court Owner") {
+  // Check if coach information form has already been submitted
+  $user_id = $_SESSION["user_id"];
+  $sql = "SELECT * FROM court WHERE user_id = '$user_id'";
+  $result = $conn->query($sql);
+  if ($result->num_rows == 0) {
+      // Coach information form has already been submitted, redirect to dashboard_coach
+      header("Location: court_info");
+      exit();
+  }
+}
+
   $user_id = $_SESSION["user_id"];
   $query = "SELECT court_id FROM court WHERE court.user_ID = '$user_id'";
   $result = mysqli_query($conn, $query);

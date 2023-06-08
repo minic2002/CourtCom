@@ -23,7 +23,7 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
     $court_id = mysqli_real_escape_string($conn, $_GET['id']);
     
     // Fetch court details
-    $query = "SELECT court.court_image, court.court_name, users.fname, users.lname, court.court_address, court.court_desc, court.court_type, court.rph, court.Availability FROM court JOIN users ON court.user_ID = users.user_id WHERE court_id = '$court_id'";
+    $query = "SELECT court.court_image, court.court_name, users.fname, users.lname, court.court_address, court.court_desc, court.court_type, court.rph FROM court JOIN users ON court.user_ID = users.user_id WHERE court_id = '$court_id'";
     $result = mysqli_query($conn, $query);
     
     if ($result && mysqli_num_rows($result) > 0) {
@@ -84,7 +84,8 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 				<div class="side-menu">
 					<ul>
 					<li><a><?php echo $_SESSION["fname"] . " " . $_SESSION["lname"]; ?></a></li>
-					<li><a href="bookings"><i class="fa fa-clock-o"></i> Bookings </a></li>
+					<li><a href="bookings"><i class="fa fa-clock-o"></i> Court Bookings </a></li>
+					<li><a href="user-booking-coach"><i class="fa fa-clock-o"></i> Coach Bookings </a></li>
 					<li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
 					<li><a href="logout"><i class="fa fa-sign-out"></i> Logout</a></li>
 					</ul>

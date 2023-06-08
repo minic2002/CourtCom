@@ -48,7 +48,7 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 					<a class="nav-link" href="dashboard">Main</a>
 					</li>
 					<li class="nav-item">
-					<a class="nav-link active" aria-current="page" href="#">Bookings</a>
+					<a class="nav-link active" aria-current="page" href="#">Court Bookings</a>
 					</li>
 				</ul>
 				<div class="profile-icon" onclick="toggleSideMenu()">
@@ -57,7 +57,8 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 				<div class="side-menu">
 					<ul>
 					<li><a><?php echo $_SESSION["fname"] . " " . $_SESSION["lname"]; ?></a></li>
-					<li><a href="bookings"><i class="fa fa-clock-o"></i> Bookings </a></li>
+					<li><a href="#"><i class="fa fa-clock-o"></i> Court Bookings </a></li>
+					<li><a href="user-booking-coach"><i class="fa fa-clock-o"></i> Coach Bookings </a></li>
 					<li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
 					<li><a href="logout"><i class="fa fa-sign-out"></i> Logout</a></li>
 					</ul>
@@ -72,12 +73,12 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 
         include "userdb.php";
 
-        $query = "SELECT book_court.bcrt_id, court.court_name, book_court.Start_Time, book_court.End_Time, book_court.Booking_Date, book_court.Booking_Status, pay_booked_court.payment_status FROM book_court INNER JOIN court ON book_court.court_id = court.court_ID INNER JOIN pay_booked_court ON pay_booked_court.bcrt_id = book_court.bcrt_id WHERE book_court.user_id = {$_SESSION['user_id']}";
+        $query = "SELECT book_court.bcrt_id, court.court_name, book_court.Start_Time, book_court.End_Time, book_court.Booking_Date, book_court.Booking_Status, pay_booked_court.payment_amount, pay_booked_court.payment_status FROM book_court INNER JOIN court ON book_court.court_id = court.court_ID INNER JOIN pay_booked_court ON pay_booked_court.bcrt_id = book_court.bcrt_id WHERE book_court.user_id = {$_SESSION['user_id']}";
         $result = mysqli_query($conn, $query);
 
         if ($result) {
             echo '<table class="table table-striped">';
-            echo '<thead><tr><th scope="col">Booking ID</th><th scope="col">Court Name</th><th scope="col">Start Time</th><th scope="col">End Time</th><th scope="col">Booking Date</th><th scope="col">Booking Status</th><th scope="col">Payment Status</th><th scope="col">Action</th></tr></thead><tbody>';
+            echo '<thead><tr><th scope="col">Booking ID</th><th scope="col">Court Name</th><th scope="col">Start Time</th><th scope="col">End Time</th><th scope="col">Booking Date</th><th scope="col">Booking Status</th><th scope="col">Payment Amount</th><th scope="col">Payment Status</th><th scope="col">Action</th></tr></thead><tbody>';
 
             while ($row = mysqli_fetch_assoc($result)) {
             echo '<tr>';
@@ -87,6 +88,7 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
             echo '<td>' . $row['End_Time'] . '</td>';
             echo '<td>' . $row['Booking_Date'] . '</td>';
             echo '<td>' . $row['Booking_Status'] . '</td>';
+            echo '<td>' . $row['payment_amount'] . '</td>';
             echo '<td>' . $row['payment_status'] . '</td>';
             echo '<td> <button onclick="delete_booked_court(' . $row['bcrt_id'] . ')"> <i class="fa fa-trash"></i> </button></td>';
             echo '</tr>';

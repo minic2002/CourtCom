@@ -52,9 +52,6 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 					<li class="nav-item">
 					<a class="nav-link active" aria-current="page" href="#">Coach</a>
 					</li>
-					<li class="nav-item">
-					<a class="nav-link" href="#">Categories</a>
-					</li>
 				</ul>
 				<div class="profile-icon" onclick="toggleSideMenu()">
 					<img src="<?php echo $_SESSION["user_pic"]; ?>" width="20">
@@ -62,7 +59,8 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 				<div class="side-menu">
 					<ul>
 					<li><a href="#"><?php echo $_SESSION["fname"] . " " . $_SESSION["lname"]; ?></a></li>
-					<li><a href="bookings"><i class="fa fa-clock-o"></i> Bookings </a></li>
+					<li><a href="bookings"><i class="fa fa-clock-o"></i> Court Bookings </a></li>
+					<li><a href="user-booking-coach"><i class="fa fa-clock-o"></i> Coach Bookings </a></li>
 					<li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
 					<li><a href="logout"><i class="fa fa-sign-out"></i> Logout</a></li>
 					</ul>

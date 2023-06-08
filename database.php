@@ -133,7 +133,6 @@ if (isset($_POST["regcourt"])) {
     $court_desc = $_POST["court_desc"];
     $court_type = $_POST["court_type"];
     $rph = $_POST["rph"];
-    $availability = " ";
 
     // Specify the directory where the file should be uploaded
     $uploadDir = "static/images/court_images/";
@@ -149,9 +148,9 @@ if (isset($_POST["regcourt"])) {
     //upload the file
     move_uploaded_file($_FILES["court_image"]["tmp_name"], $uploadFile);
 
-    $sql = "INSERT INTO court (user_id, court_name, court_image, court_address, court_desc, court_type, rph, Availability) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO court (user_id, court_name, court_image, court_address, court_desc, court_type, rph ) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "ssssssss", $user_id, $court_name, $uploadFile, $court_address, $court_desc, $court_type, $rph, $availability);
+    mysqli_stmt_bind_param($stmt, "sssssss", $user_id, $court_name, $uploadFile, $court_address, $court_desc, $court_type, $rph);
     mysqli_stmt_execute($stmt);
 
     //redirect to dashboard_court
@@ -165,11 +164,10 @@ if (isset($_POST["regcoach"])) {
     $coachdesc = $_POST["coachdesc"];
     $sport_type = $_POST["sport_type"];
     $rph = $_POST["rph"];
-    $availability = " ";
 
-    $sql = "INSERT INTO coach (user_id, sport_type, rph, coach_desc, availability) VALUES (?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO coach (user_id, sport_type, rph, coach_desc) VALUES (?, ?, ?, ?)";
     $stmt = mysqli_prepare($conn, $sql);
-    mysqli_stmt_bind_param($stmt, "sssss", $user_id, $sport_type, $rph, $coachdesc, $availability);
+    mysqli_stmt_bind_param($stmt, "ssss", $user_id, $sport_type, $rph, $coachdesc);
     mysqli_stmt_execute($stmt);
 
     //redirect to dashboard_coach

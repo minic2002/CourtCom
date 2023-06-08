@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 22, 2023 at 12:07 AM
+-- Generation Time: May 23, 2023 at 08:37 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 7.3.2
 
@@ -43,13 +43,16 @@ CREATE TABLE `book_coach` (
 --
 
 INSERT INTO `book_coach` (`bcch_id`, `user_id`, `coach_id`, `Start_Time`, `End_Time`, `Booking_Date`, `Booking_Status`) VALUES
-(8, 77, 6, '06:00:00', '21:00:00', '2023-05-31', 'Pending'),
-(9, 29, 6, '09:00:00', '12:00:00', '2023-05-30', 'Pending'),
+(9, 29, 6, '09:00:00', '12:00:00', '2023-05-30', 'Accept'),
 (10, 29, 5, '08:00:00', '09:00:00', '2023-05-25', 'Pending'),
 (11, 29, 3, '14:00:00', '16:00:00', '2023-05-25', 'Pending'),
 (13, 29, 4, '15:30:00', '17:00:00', '2023-05-24', 'Pending'),
 (14, 37, 6, '06:00:00', '20:00:00', '2023-05-24', 'Pending'),
-(15, 77, 3, '07:00:00', '08:00:00', '2023-05-31', 'Pending');
+(15, 77, 3, '07:00:00', '08:00:00', '2023-05-31', 'Pending'),
+(17, 77, 6, '11:00:00', '12:00:00', '2023-05-31', 'Accept'),
+(18, 81, 7, '12:30:00', '15:30:00', '2023-06-07', 'Accept'),
+(19, 77, 4, '07:00:00', '08:00:00', '2023-05-31', 'Pending'),
+(20, 77, 9, '17:06:00', '18:35:00', '2023-06-08', 'Accept');
 
 -- --------------------------------------------------------
 
@@ -74,7 +77,9 @@ CREATE TABLE `book_court` (
 INSERT INTO `book_court` (`bcrt_id`, `user_id`, `court_id`, `Start_Time`, `End_Time`, `Booking_Date`, `Booking_Status`) VALUES
 (57, 37, 13, '16:00:00', '17:00:00', '2023-05-24', 'Pending'),
 (58, 29, 13, '10:00:00', '12:00:00', '2023-05-30', 'Pending'),
-(59, 29, 7, '16:00:00', '18:00:00', '2023-05-24', 'Pending');
+(59, 29, 7, '16:00:00', '18:00:00', '2023-05-24', 'Pending'),
+(65, 77, 8, '13:02:00', '15:03:00', '2023-06-01', 'Pending'),
+(66, 77, 16, '15:00:00', '17:00:00', '2023-06-08', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -87,19 +92,21 @@ CREATE TABLE `coach` (
   `user_ID` int(6) NOT NULL,
   `sport_type` varchar(50) NOT NULL,
   `RPH` double NOT NULL,
-  `coach_desc` varchar(300) NOT NULL,
-  `availability` varchar(50) NOT NULL
+  `coach_desc` varchar(300) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `coach`
 --
 
-INSERT INTO `coach` (`coach_ID`, `user_ID`, `sport_type`, `RPH`, `coach_desc`, `availability`) VALUES
-(3, 55, 'Badminton', 100, 'Hi! My Name is Doja Cat. I am able to assist you and coach you for your badminton tryouts.', ' '),
-(4, 56, 'Gymnastics', 100, 'Gymnast Coach', ' '),
-(5, 64, 'Volleyball', 50, 'I am a renowned volleyball player. I won a lot of awards. I can coach and assist you in volleyball.', ' '),
-(6, 69, 'Basketball', 45, 'blah blah blah kuan', ' ');
+INSERT INTO `coach` (`coach_ID`, `user_ID`, `sport_type`, `RPH`, `coach_desc`) VALUES
+(3, 55, 'Badminton', 100, 'Hi! My Name is Doja Cat. I am able to assist you and coach you for your badminton tryouts.'),
+(4, 56, 'Gymnastics', 100, 'Gymnast Coach'),
+(5, 64, 'Volleyball', 50, 'I am a renowned volleyball player. I won a lot of awards. I can coach and assist you in volleyball.'),
+(6, 69, 'Basketball', 45, 'blah blah blah kuan'),
+(7, 82, 'Dance', 100, 'I am a best dancer'),
+(8, 92, 'Badminton', 12, 'aaa'),
+(9, 96, 'Badminton', 10, 'alive');
 
 -- --------------------------------------------------------
 
@@ -115,25 +122,27 @@ CREATE TABLE `court` (
   `court_address` varchar(50) NOT NULL,
   `court_desc` varchar(300) NOT NULL,
   `court_type` varchar(50) NOT NULL,
-  `rph` double NOT NULL,
-  `Availability` varchar(50) NOT NULL
+  `rph` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `court`
 --
 
-INSERT INTO `court` (`court_ID`, `user_ID`, `court_name`, `court_image`, `court_address`, `court_desc`, `court_type`, `rph`, `Availability`) VALUES
-(7, 62, 'Folklore Badminton', 'static/images/court_images/Folklore Badminton-62.jpg', 'L. Flores St. Pasil, Cebu City', 'A badminton court for everyone', 'Badminton', 50, ' '),
-(8, 63, 'Basket Baron', 'static/images/court_images/Basket Baron-63.jpg', 'L. Flores St. Pasil, Cebu City', 'basketball court para sa tanan', 'Basketball', 50, ' '),
-(9, 65, 'Katy Kourt', 'static/images/court_images/Katy Kourt-65.jpg', 'Sanciangko St. Cebu City', 'Katy Kourt is a tennis court for everyone who is tennis enthusiast.', 'Tennis', 60, ' '),
-(10, 66, 'Anuada Basketanan', 'static/images/court_images/Anuada Basketanan-66.jpg', 'OsmeÃ±a Blvd. Cebu City', 'Ang description ani kay kuan', 'Basketball', 10, ' '),
-(12, 68, 'Mardon Table Tennis', 'static/images/court_images/Mardon Table Tennis-68.jpg', 'Sanciangko St. Cebu City', 'Table Tennis dapit sa Sanciangko unya barato ra siya periodt.', 'Table tennis', 50, ' '),
-(13, 71, 'Waren Swim Training', 'static/images/court_images/Waren Swim Training-71.jpg', 'Sanciangko St. Cebu City', 'Waren Swim Training is a pool training facility for people who love to practice swimming.', 'Swimming', 50, ' '),
-(14, 73, 'Queen Volleyballanan', 'static/images/court_images/Queen Volleyballanan-73.jpg', 'OsmeÃ±a Blvd. Cebu City', 'Pull up in the monster automobile gangster. With a bad bitch that came from Sri Lanka.', 'Volleyball', 500, ' '),
-(15, 74, 'Janine DaGym', 'static/images/court_images/Janine DaGym-74.jpg', 'OsmeÃ±a Blvd. Cebu City', 'Practisanan og sayaw', 'Dance', 30, ' '),
-(16, 75, 'Dan Mark Gym', 'static/images/court_images/Dan Mark Gym-75.jpg', 'Sanciangko St. Cebu City', 'Practisanan sa mga gymnast', 'Gymnastics', 80, ' '),
-(17, 79, 'Green Valley Court', 'static/images/court_images/Green Valley Court-79.jpg', 'Lomboy St. Banawa, Cebu City', 'Green Valley Court has various courts that users can utilize: Basketball, Volleyball, Swimming Pool, Oval, and Badminton', 'General', 80, ' ');
+INSERT INTO `court` (`court_ID`, `user_ID`, `court_name`, `court_image`, `court_address`, `court_desc`, `court_type`, `rph`) VALUES
+(7, 62, 'Folklore Badminton', 'static/images/court_images/Folklore Badminton-62.jpg', 'L. Flores St. Pasil, Cebu City', 'A badminton court for everyone', 'Badminton', 50),
+(8, 63, 'Basket Baron', 'static/images/court_images/Basket Baron-63.jpg', 'L. Flores St. Pasil, Cebu City', 'basketball court para sa tanan', 'Basketball', 50),
+(9, 65, 'Katy Kourt', 'static/images/court_images/Katy Kourt-65.jpg', 'Sanciangko St. Cebu City', 'Katy Kourt is a tennis court for everyone who is tennis enthusiast.', 'Tennis', 60),
+(10, 66, 'Anuada Basketanan', 'static/images/court_images/Anuada Basketanan-66.jpg', 'OsmeÃ±a Blvd. Cebu City', 'Ang description ani kay kuan', 'Basketball', 10),
+(12, 68, 'Mardon Table Tennis', 'static/images/court_images/Mardon Table Tennis-68.jpg', 'Sanciangko St. Cebu City', 'Table Tennis dapit sa Sanciangko unya barato ra siya periodt.', 'Table tennis', 50),
+(13, 71, 'Waren Swim Training', 'static/images/court_images/Waren Swim Training-71.jpg', 'Sanciangko St. Cebu City', 'Waren Swim Training is a pool training facility for people who love to practice swimming.', 'Swimming', 50),
+(14, 73, 'Queen Volleyballanan', 'static/images/court_images/Queen Volleyballanan-73.jpg', 'OsmeÃ±a Blvd. Cebu City', 'Pull up in the monster automobile gangster. With a bad bitch that came from Sri Lanka.', 'Volleyball', 500),
+(15, 74, 'Janine DaGym', 'static/images/court_images/Janine DaGym-74.jpg', 'OsmeÃ±a Blvd. Cebu City', 'Practisanan og sayaw', 'Dance', 30),
+(16, 75, 'Dan Mark Gym', 'static/images/court_images/Dan Mark Gym-75.jpg', 'Sanciangko St. Cebu City', 'Practisanan sa mga gymnast', 'Gymnastics', 80),
+(17, 79, 'Green Valley Court', 'static/images/court_images/Green Valley Court-79.jpg', 'Lomboy St. Banawa, Cebu City', 'Green Valley Court has various courts that users can utilize: Basketball, Volleyball, Swimming Pool, Oval, and Badminton', 'General', 80),
+(18, 80, 'Bruno Basketanan', 'static/images/court_images/Bruno Basketanan-80.jpg', 'Lomboy St. Banawa, Cebu City', 'basketanan duol ilang Janine', 'Basketball', 300),
+(19, 94, 'glow bad', 'static/images/court_images/glow bad-94.jpg', 'Sanciangko St. Cebu City', 'qwerty street', 'Badminton', 11),
+(20, 95, 'space jam', 'static/images/court_images/space jam-95.jpg', 'outerspace', 'out of this world badminton court', 'Badminton', 100);
 
 -- --------------------------------------------------------
 
@@ -154,13 +163,16 @@ CREATE TABLE `pay_booked_coach` (
 --
 
 INSERT INTO `pay_booked_coach` (`pbcch_id`, `bcch_id`, `payment_type`, `payment_amount`, `payment_status`) VALUES
-(1, 8, 'Walk-In Payment', 675, 'Walk-In Payment'),
-(2, 9, 'Walk-In Payment', 135, 'Walk-In Payment'),
+(2, 9, 'Walk-In Payment', 135, 'Paid'),
 (3, 10, 'Walk-In Payment', 50, 'Walk-In Payment'),
 (4, 11, 'Walk-In Payment', 200, 'Walk-In Payment'),
 (5, 13, 'Walk-In Payment', 170, 'Walk-In Payment'),
 (6, 14, 'Walk-In Payment', 630, 'Walk-In Payment'),
-(7, 15, 'Walk-In Payment', 100, 'Walk-In Payment');
+(7, 15, 'Walk-In Payment', 100, 'Walk-In Payment'),
+(8, 17, 'Walk-In Payment', 45, 'Paid'),
+(9, 18, 'Walk-In Payment', 300, 'Paid'),
+(10, 19, 'Walk-In Payment', 100, 'Walk-In Payment'),
+(11, 20, 'Walk-In Payment', 12.9, 'Paid');
 
 -- --------------------------------------------------------
 
@@ -183,7 +195,9 @@ CREATE TABLE `pay_booked_court` (
 INSERT INTO `pay_booked_court` (`pbcrt_id`, `bcrt_id`, `payment_type`, `payment_amount`, `payment_status`) VALUES
 (7, 57, 'Walk-In Payment', 50, 'Walk-In Payment'),
 (8, 58, 'Walk-In Payment', 100, 'Walk-In Payment'),
-(9, 59, 'Walk-In Payment', 100, 'Walk-In Payment');
+(9, 59, 'Walk-In Payment', 100, 'Walk-In Payment'),
+(15, 65, 'Walk-In Payment', 100.5, 'Walk-In Payment'),
+(16, 66, 'Walk-In Payment', 160, 'Walk-In Payment');
 
 -- --------------------------------------------------------
 
@@ -247,7 +261,10 @@ INSERT INTO `review_court` (`review_court_id`, `user_id`, `court_id`, `review_te
 (21, 37, 8, 'this basketball is ok', 3, '2023-05-21 10:32:56'),
 (22, 37, 15, 'nice kaayo ang dance gym barato ra kaayo ', 5, '2023-05-21 10:52:01'),
 (23, 29, 13, 'naka suway na mig practice diri, to tell you honestly, nice kaayo diri jd promise', 5, '2023-05-21 12:16:38'),
-(24, 77, 10, 'ang nakanindot ani kay barato ra jd kaayo pero dili ko ganahan sa environment sa place', 3, '2023-05-21 19:49:47');
+(24, 77, 10, 'ang nakanindot ani kay barato ra jd kaayo pero dili ko ganahan sa environment sa place', 3, '2023-05-21 19:49:47'),
+(26, 37, 13, 'nice pool', 4, '2023-05-22 20:32:19'),
+(27, 77, 12, 'nindot ni diri', 4, '2023-05-23 14:54:54'),
+(28, 81, 18, 'lingaw kaayo ganiha sa bruno basketanan', 4, '2023-05-23 15:27:53');
 
 -- --------------------------------------------------------
 
@@ -275,22 +292,32 @@ INSERT INTO `users` (`user_id`, `fname`, `lname`, `user_pic`, `usertype`, `email
 (37, 'Zach ', 'Rockwell', 'static/images/profile_pictures/ZachRockwell09990011110.jpg', 'User', 'zachrock@gmail.com', '09990011110', '202cb962ac59075b964b07152d234b70'),
 (55, 'Doja ', 'Cat', 'static/images/profile_pictures/DojaCar09563451234.jpg', 'Coach', 'dojacat@gmail.com', '09563451234', '202cb962ac59075b964b07152d234b70'),
 (56, 'Randall', 'Dela Pisa', 'static/images/profile_pictures/RandallIversonDelaPisa09352347865.jpg', 'Coach', 'sire@gmail.com', '09352347865', '202cb962ac59075b964b07152d234b70'),
-(62, 'Taylor', 'Swift', '', 'Court Owner', 'taylorswift@uc.edu.ph', '09435672312', '202cb962ac59075b964b07152d234b70'),
-(63, 'Baron', 'Green', '', 'Court Owner', 'baron_green@gmail.com', '09643346537', '202cb962ac59075b964b07152d234b70'),
+(62, 'Taylor', 'Swift', 'static/images/profile_pictures/TaylorSwift09435672312.jpg', 'Court Owner', 'taylorswift@uc.edu.ph', '09435672312', '202cb962ac59075b964b07152d234b70'),
+(63, 'Baron', 'Green', 'static/images/profile_pictures/BaronGreen09643346537.jpg', 'Court Owner', 'baron_green@gmail.com', '09643346537', '202cb962ac59075b964b07152d234b70'),
 (64, 'Ariana', 'Grande', 'static/images/profile_pictures/ArianaGrande09893345645.jpg', 'Coach', 'arianagrande@gmail.com', '09893345645', '202cb962ac59075b964b07152d234b70'),
-(65, 'Katy', 'Perry', '', 'Court Owner', 'katycat@gmail.com', '09232241234', '202cb962ac59075b964b07152d234b70'),
+(65, 'Katy', 'Perry', 'static/images/profile_pictures/KatyPerry09232241234.jpg', 'Court Owner', 'katycat@gmail.com', '09232241234', '202cb962ac59075b964b07152d234b70'),
 (66, 'Ericson', 'Anuada', 'static/images/profile_pictures/EricsonAnuada09345673421.jpg', 'Court Owner', 'anuadaericson@gmail.com', '09345673421', '202cb962ac59075b964b07152d234b70'),
 (68, 'Mardon', 'Dela PeÃ±a', 'static/images/profile_pictures/MardonDelaPena09436567768.jpg', 'Court Owner', 'mardondelapena@gmail.com', '09436567768', '202cb962ac59075b964b07152d234b70'),
 (69, 'Christ Rile', 'Parinasan', 'static/images/profile_pictures/ChristRile09352347865.jpg', 'Coach', 'rile@gmail.com', '09342257867', '202cb962ac59075b964b07152d234b70'),
 (70, 'Chandler', 'Brown', 'static/images/profile_pictures/ChandlerBrown09435576578.jpg', 'User', 'chandlerbrown@gmail.com', '09435576578', '202cb962ac59075b964b07152d234b70'),
-(71, 'Waren', 'Auman', '', 'Court Owner', 'warenauman@gmail.com', '09342215678', '202cb962ac59075b964b07152d234b70'),
+(71, 'Waren', 'Auman', 'static/images/profile_pictures/WarenAuman09342215678.jpg', 'Court Owner', 'warenauman@gmail.com', '09342215678', '202cb962ac59075b964b07152d234b70'),
 (73, 'Nicki', 'Minaj', 'static/images/profile_pictures/NickiMinaj09342285643.jpg', 'Court Owner', 'onickamaraj@gmail.com', '09342285643', '202cb962ac59075b964b07152d234b70'),
 (74, 'Janine', 'Ubal', 'static/images/profile_pictures/JanineUbal09884565577.jpg', 'Court Owner', 'ninbal@gmail.com', '09884565577', '202cb962ac59075b964b07152d234b70'),
-(75, 'Dan Mark', 'Sandigan', '', 'Court Owner', 'dms@gmail.com', '09545543423', '202cb962ac59075b964b07152d234b70'),
+(75, 'Dan Mark', 'Sandigan', 'static/images/profile_pictures/danmark09545543423.jpg', 'Court Owner', 'dms@gmail.com', '09545543423', '202cb962ac59075b964b07152d234b70'),
 (76, 'Gerda', 'Bagahansol', 'static/images/profile_pictures/GerdaBagahansol09342212121.jpeg', 'User', 'gerdabagahansol@gmail.com', '09342212121', '202cb962ac59075b964b07152d234b70'),
 (77, 'Dominic', 'Navos', 'static/images/profile_pictures/DominicNavos09994096196.jpg', 'User', 'dominicnavos@gmail.com', '09994096196', '202cb962ac59075b964b07152d234b70'),
 (78, 'Camila', 'Cabello', 'static/images/profile_pictures/CamilaCabello09992341214.jpg', 'User', 'camilacabello@gmail.com', '09992341214', '202cb962ac59075b964b07152d234b70'),
-(79, 'Rihanna', 'Rocky', 'static/images/profile_pictures/RihannaRocky09329231221.jpg', 'Court Owner', 'riri@gmail.com', '09329231221', '202cb962ac59075b964b07152d234b70');
+(79, 'Rihanna', 'Rocky', 'static/images/profile_pictures/RihannaRocky09329231221.jpg', 'Court Owner', 'riri@gmail.com', '09329231221', '202cb962ac59075b964b07152d234b70'),
+(80, 'Bruno', 'Mars', 'static/images/profile_pictures/BrunoMars09345564343.png', 'Court Owner', 'brunomars@gmail.com', '09345564343', '202cb962ac59075b964b07152d234b70'),
+(81, 'Mariah', 'Carey', 'static/images/profile_pictures/MariahCarey09453554567.jpg', 'User', 'mc@gmail.com', '09453554567', '202cb962ac59075b964b07152d234b70'),
+(82, 'Alicia ', 'Keys', 'static/images/profile_pictures/Alicia Keys09000999990.jpg', 'Coach', 'ak@gmail.com', '09000999990', '202cb962ac59075b964b07152d234b70'),
+(90, 'John Ryan', 'Solon', 'static/images/profile_pictures/John RyanSolon09342231212.jpg', 'Court Owner', 'jrs@gmail.com', '09342231212', '202cb962ac59075b964b07152d234b70'),
+(91, 'Kuan', 'Ngalan', 'static/images/profile_pictures/KuanNgalan09453321232.jpg', 'Court Owner', 'kn@gmail.com', '09453321232', '202cb962ac59075b964b07152d234b70'),
+(92, 'qwerty', 'asd', 'static/images/profile_pictures/qwertyasd09456675454.jpg', 'Coach', 'qa@gmail.com', '09456675454', '202cb962ac59075b964b07152d234b70'),
+(93, 'Bitch', '123', 'static/images/profile_pictures/Bitch12309453342312.jpg', 'Court Owner', 'b123@gmail.com', '09453342312', '202cb962ac59075b964b07152d234b70'),
+(94, 'wer', 'wer', 'static/images/profile_pictures/werwer09453421212.jpg', 'Court Owner', 'wer@gmail.com', '09453421212', '202cb962ac59075b964b07152d234b70'),
+(95, 'tear', 'drop', 'static/images/profile_pictures/teardrop09097776666.jpg', 'Court Owner', 'td@gmail.com', '09097776666', '202cb962ac59075b964b07152d234b70'),
+(96, 'Aaliyah', 'Mondragon', 'static/images/profile_pictures/AaliyahMondragon09452321122.jpg', 'Coach', 'aaliyah@gmail.com', '09452321122', '202cb962ac59075b964b07152d234b70');
 
 --
 -- Indexes for dumped tables
@@ -370,37 +397,37 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `book_coach`
 --
 ALTER TABLE `book_coach`
-  MODIFY `bcch_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `bcch_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `book_court`
 --
 ALTER TABLE `book_court`
-  MODIFY `bcrt_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
+  MODIFY `bcrt_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `coach`
 --
 ALTER TABLE `coach`
-  MODIFY `coach_ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `coach_ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `court`
 --
 ALTER TABLE `court`
-  MODIFY `court_ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `court_ID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `pay_booked_coach`
 --
 ALTER TABLE `pay_booked_coach`
-  MODIFY `pbcch_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `pbcch_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `pay_booked_court`
 --
 ALTER TABLE `pay_booked_court`
-  MODIFY `pbcrt_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `pbcrt_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `review_coach`
@@ -412,13 +439,13 @@ ALTER TABLE `review_coach`
 -- AUTO_INCREMENT for table `review_court`
 --
 ALTER TABLE `review_court`
-  MODIFY `review_court_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `review_court_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `user_id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
 
 --
 -- Constraints for dumped tables
