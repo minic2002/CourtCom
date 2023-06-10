@@ -63,6 +63,7 @@ if ($_SESSION["usertype"] == "Coach") {
 						<option value="Table tennis">Table tennis</option>
 						<option value="Tennis">Tennis</option>
 						<option value="Volleyball">Volleyball</option>
+						<option value="General">General</option>
 					</select><br>					
 					<input type="number" name="rph" id="rph" min="1" step="0.01" placeholder="Rate Per Hour" required><br>
 					<input type="submit" name="regcoach" value="REGISTER COACH ">

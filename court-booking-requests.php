@@ -166,10 +166,16 @@ if (mysqli_num_rows($result) == 1) {
     </section>
     <script>
       function court_accept_book(bcrt_id){
-        location.href="court-accept-book?id="+bcrt_id;
+        var ok = confirm("Do you want to accept this particular booking?")
+        if (ok) {
+          location.href="court-accept-book?id="+bcrt_id;
+        }
       }
       function court_decline_book(bcrt_id){
-        location.href="court-decline-book?id="+bcrt_id;
+        var ok = confirm("Do you want to decline this particular booking?")
+        if (ok) {
+          location.href="court-decline-book?id="+bcrt_id;
+        }
       }
     </script>
     <script>

@@ -167,11 +167,17 @@ if (mysqli_num_rows($result) == 1) {
     
     <script>
       function coach_accept_book(bcch_id){
-        location.href="coach-accept-book?id="+bcch_id;
+        var ok = confirm("Do you want to accept this particular booking?")
+        if (ok) {
+          location.href="coach-accept-book?id="+bcch_id;
+        }
       }
 
       function coach_decline_book(bcch_id){
+        var ok = confirm("Do you want to decline this particular booking?")
+        if (ok) {
         location.href="coach-decline-book?id="+bcch_id;
+        }
       }
 
       let sidebar = document.querySelector(".sidebar");

@@ -170,11 +170,17 @@ if (mysqli_num_rows($result) == 1) {
     
     <script>
       function court_change_payment_status(bcrt_id){
-        location.href="court-change-payment-status?id="+bcrt_id;
+        var ok = confirm("Do you want to change the payment status of the booker?")
+        if (ok) {
+          location.href="court-change-payment-status?id="+bcrt_id;
+        }
       }
 
       function court_delete_book(bcrt_id){
-        location.href="court-delete-book?id="+bcrt_id;
+        var ok = confirm("Do you want to delete this particular booking?")
+        if (ok) {
+          location.href="court-delete-book?id="+bcrt_id;
+        }
       }
 
       let sidebar = document.querySelector(".sidebar");

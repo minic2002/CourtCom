@@ -52,6 +52,22 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 					<li class="nav-item">
 					<a class="nav-link active" aria-current="page" href="#">Coach</a>
 					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Category
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
+							<li><a class="dropdown-item" href="categories?category=Badminton">Badminton</a></li>
+							<li><a class="dropdown-item" href="categories?category=Basketball">Basketball</a></li>
+							<li><a class="dropdown-item" href="categories?category=Dance">Dance</a></li>
+							<li><a class="dropdown-item" href="categories?category=Gymnastics">Gymnastics</a></li>
+							<li><a class="dropdown-item" href="categories?category=Swimming">Swimming</a></li>
+							<li><a class="dropdown-item" href="categories?category=Table+Tennis">Table Tennis</a></li>
+							<li><a class="dropdown-item" href="categories?category=Tennis">Tennis</a></li>
+							<li><a class="dropdown-item" href="categories?category=Volleyball">Volleyball</a></li>
+							<li><a class="dropdown-item" href="categories?category=General">General</a></li>
+						</ul>
+					</li>
 				</ul>
 				<div class="profile-icon" onclick="toggleSideMenu()">
 					<img src="<?php echo $_SESSION["user_pic"]; ?>" width="20">
