@@ -107,7 +107,7 @@ $result = mysqli_query($conn, $query);
                 <img src="<?php echo $row['user_pic']; ?>" class="rounded-circle" width="140" height="140" style="object-fit: cover;">
 
                 <h2><?php echo $row['fname'] . ' ' . $row['lname']; ?></h2>
-                <p><a class="btn btn-secondary" href="view-coach?id=<?php echo $row['coach_ID']; ?>">View details »</a></p>
+                <p><a class="btn btn-primary" href="view-coach?id=<?php echo $row['coach_ID']; ?>">View details »</a></p>
 
             </div><!-- /.col-lg-4 -->
 
