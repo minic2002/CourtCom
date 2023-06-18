@@ -97,3 +97,11 @@ input[type="submit"], button {
 .skyan,.skyan:hover{color:#fff!important;background-color:#5BCCF6!important}
 .text-skyan,.text-skyan:hover{color:#5BCCF6!important;}
 .text-magic-ink,text-magic-ink:hover{color:#0047FF!important;}
+
+/* hidden scrollbar */
+
+/* For WebKit based browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+	width: 0.0em; /*Set a width for the scrollbar (optional) */
+  }
+  /* end hidden */

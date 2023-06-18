@@ -197,7 +197,7 @@ ob_start(); // Start output buffering
 			<div class="teamcontent">
 				<div class="imgBx"><img src="static/images/marpic.jpg"></div>
 			<div class="contentBx">
-				<h3>Mardon Dela Peña<br><span>Back End Developer</span></h3>
+				<h3>Mardon Dela Peña<br><span>Front End Designer</span></h3>
 			</div>
 			</div>
 			<ul class="sci">
