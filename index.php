@@ -8,11 +8,15 @@ ob_start(); // Start output buffering
 		
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container-fluid">
-			<a class="navbar-brand" href="dashboard"><img src="static/images/CourtCom_Logo_more_stroke.png" width="135"></a>
+			<a class="navbar-brand" href="#"><img src="static/images/CourtCom_Logo_more_stroke.png" width="135"></a>
 				<!-- Left side of navbar -->
 				<div class="navbar-nav me-auto">
 					<a class="nav-link active nav-link-hover" aria-current="page" href="#">Home</a>
+					<a class="nav-link active nav-link-hover" aria-current="page" href="#CourtRent">Court</a>
+					<a class="nav-link active nav-link-hover" aria-current="page" href="#Coach">Coach</a>
 					<a class="nav-link active nav-link-hover" aria-current="page" href="#About">About Us</a>
+					<a class="nav-link active nav-link-hover" aria-current="page" href="#How">Services</a>
+					<a class="nav-link active nav-link-hover" aria-current="page" href="#team">Team</a>
 				</div>
 
 				<!-- Right side of navbar -->

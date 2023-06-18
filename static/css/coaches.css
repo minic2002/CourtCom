@@ -22,7 +22,6 @@ body {
 
 
 h2 {
-  font-family: Arial;
   font-weight: bold;
 }
 
@@ -92,6 +91,8 @@ h1 {
   background: linear-gradient(60deg, #fcde67, #5BCCF6);
   background-size: 100% 100%;
 }
+
+
 
 
 /* hidden scrollbar */
