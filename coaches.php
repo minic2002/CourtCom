@@ -53,7 +53,7 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 					<a class="nav-link active" aria-current="page" href="#">Coach</a>
 					</li>
 					<li class="nav-item dropdown">
-						<a class="nav-link dropdown-toggle" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						<a class="nav-link" href="#" id="categoriesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 							Category
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
