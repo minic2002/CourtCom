@@ -25,7 +25,7 @@ $court_id = $_GET['court_id'];
 $user_id = $_GET['user_id'];
 
 if ($_SESSION['user_id'] != $user_id) {
-    header('Location: view-court?id=$court_id');
+    header("Location: view-court?id=$court_id");
     exit();
 }
 
