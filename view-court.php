@@ -129,31 +129,35 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 
         <!--Display ratings and reviews-->
         <?php
-            $query = "SELECT users.user_pic, users.fname, users.lname, review_court.review_text, review_court.rate, review_court.review_date FROM review_court JOIN users ON review_court.user_id = users.user_id WHERE review_court.court_id = '$court_id' ORDER BY review_court.rate DESC";
-            $result = mysqli_query($conn, $query);
+        $query = "SELECT users.user_id, users.user_pic, users.fname, users.lname, review_court.review_text, review_court.rate, review_court.review_date FROM review_court JOIN users ON review_court.user_id = users.user_id WHERE review_court.court_id = '$court_id' ORDER BY review_court.rate DESC";
+        $result = mysqli_query($conn, $query);
 
-            if ($result && mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    echo '<div class="card mt-3">';
-                    echo '<div class="card-body">';
-                    echo '<div class="d-flex align-items-center">';
-                    echo '<img src="'.$row['user_pic'].'" class="rounded-circle me-3" width="50" height="50" alt=" '.$row['fname'].' '.$row['lname']. ' ">';
-                    echo '<div>';
-                    echo '<h5 class="card-title mb-0">'.$row['fname'].' '.$row['lname']. ' ' . '<span class="fa fa-star"></span> ' . $row['rate'] . '</h5>';
-                    echo '<h6 class="text-muted">'.$row['review_date'].'</h6>';
-                    echo '</div>';
-                    echo '</div>';
-                    echo '<div class="mt-3">';
-                    echo '<h4 class="card-text">'.$row['review_text'].'</h4>';
-                    echo '</div>';
-                    echo '</div>';
-                    echo '</div>';
-                }
-            } else {
-                echo '<br><br><h5 class="text-center">No ratings and reviews available.</h5> <br><br>';
+        if ($result && mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) {
+        ?>
+            <div class="card mt-3">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <img src="<?php echo $row['user_pic']; ?>" class="rounded-circle me-3" width="50" height="50" alt="<?php echo $row['fname'].' '.$row['lname']; ?>">
+                        <div>
+                            <h5 class="card-title mb-0"><?php echo $row['fname'].' '.$row['lname']; ?><span class="fa fa-star"></span> <?php echo $row['rate']; ?></h5>
+                            <h6 class="text-muted"><?php echo $row['review_date']; ?></h6>
+                        </div>
+                        <?php echo $_SESSION['user_id'] == $row['user_id'] ? '<div class="position-absolute top-0 end-0" style="margin-right: 10px;"><span class="fa fa-ellipsis-v" data-bs-toggle="dropdown"></span><div class="dropdown-menu"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="delete-review-court?court_id=' . $court_id . '&user_id=' . $row['user_id'] . '">Delete</a></div></div>' : '' ?>
+                    </div>
+                    <div class="mt-3">
+                        <h4 class="card-text"><?php echo $row['review_text']; ?></h4>
+                    </div>
+                </div>
+            </div>
+        <?php
             }
+        } else {
+            echo '<br><br><h5 class="text-center">No ratings and reviews available.</h5><br><br>';
+        }
         ?>
         <!--End of displaying-->
+
         </div>
     <!--END OF RATINGS AND REVIEW-->
 
