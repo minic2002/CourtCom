@@ -312,4 +312,30 @@ if (isset($_POST["pabo_coach"])) {
     }
 }
 
+//Edit Review Court
+if (isset($_POST["update_rr_court"])) {
+    $review_court_id = $_POST["review_court_id"];
+    $court_id = $_POST["court_id"];
+    $court_review = $_POST["review_court"];
+    $court_rate = $_POST["rate_court"];
+    $user_id = $_SESSION["user_id"];
+
+    if (strlen(trim($court_review)) != 0 && strlen(trim($court_rate))) {
+        $stmt = mysqli_prepare($conn, "UPDATE review_court SET review_text = ?, rate = ? WHERE review_court_id = ?");
+        mysqli_stmt_bind_param($stmt, "ssi", $court_review, $court_rate, $review_court_id);
+        mysqli_stmt_execute($stmt);
+    
+        if (mysqli_affected_rows($conn) > 0) {
+            header("Location: view-court?id=$court_id");
+            exit();
+        } 
+        else {
+            header("Location: view-court?id=$court_id");
+            exit();
+        }
+    } else {
+        header("Location: edit-review-court?review_court_id=$review_court_id&court_id=$court_id&user_id=$user_id");
+        exit();
+    }
+}
 ?>

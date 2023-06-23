@@ -57,10 +57,10 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 				</button>
 				<div class="collapse navbar-collapse" id="navbarsExample07XL">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item active">
+					<li class="nav-item">
 					<a class="nav-link" href="dashboard">Main</a>
 					</li>
-					<li class="nav-item">
+					<li class="nav-item active">
 					<a class="nav-link active" aria-current="page" href="#">View Court</a>
 					</li>
 				</ul>
@@ -129,7 +129,7 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 
         <!--Display ratings and reviews-->
         <?php
-        $query = "SELECT users.user_id, users.user_pic, users.fname, users.lname, review_court.review_text, review_court.rate, review_court.review_date FROM review_court JOIN users ON review_court.user_id = users.user_id WHERE review_court.court_id = '$court_id' ORDER BY review_court.rate DESC";
+        $query = "SELECT users.user_id, users.user_pic, users.fname, users.lname, review_court.review_court_id, review_court.review_text, review_court.rate, review_court.review_date FROM review_court JOIN users ON review_court.user_id = users.user_id WHERE review_court.court_id = '$court_id' ORDER BY review_court.rate DESC";
         $result = mysqli_query($conn, $query);
 
         if ($result && mysqli_num_rows($result) > 0) {
@@ -143,7 +143,7 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
                             <h5 class="card-title mb-0"><?php echo $row['fname'].' '.$row['lname']; ?><span class="fa fa-star"></span> <?php echo $row['rate']; ?></h5>
                             <h6 class="text-muted"><?php echo $row['review_date']; ?></h6>
                         </div>
-                        <?php echo $_SESSION['user_id'] == $row['user_id'] ? '<div class="position-absolute top-0 end-0" style="margin-right: 10px;"><span class="fa fa-ellipsis-v" data-bs-toggle="dropdown"></span><div class="dropdown-menu"><a class="dropdown-item" href="#">Edit</a><a class="dropdown-item" href="delete-review-court?court_id=' . $court_id . '&user_id=' . $row['user_id'] . '">Delete</a></div></div>' : '' ?>
+                        <?php echo $_SESSION['user_id'] == $row['user_id'] ? '<div class="position-absolute top-0 end-0" style="margin-right: 10px;"><span class="fa fa-ellipsis-v" data-bs-toggle="dropdown"></span><div class="dropdown-menu"><a class="dropdown-item" href="edit-review-court?review_court_id=' . $row['review_court_id'] . '&court_id=' . $court_id . '&user_id=' . $row['user_id'] . '">Edit</a><a class="dropdown-item" href="delete-review-court?review_court_id=' . $row['review_court_id'] . '&court_id=' . $court_id . '&user_id=' . $row['user_id'] . '">Delete</a></div></div>' : '' ?>
                     </div>
                     <div class="mt-3">
                         <h4 class="card-text"><?php echo $row['review_text']; ?></h4>

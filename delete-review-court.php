@@ -21,6 +21,7 @@ if ($_SESSION["usertype"] == "Court Owner" || $_SESSION["usertype"] == "Coach") 
 }
 
 //IDs
+$review_court_id = $_GET['review_court_id'];
 $court_id = $_GET['court_id'];
 $user_id = $_GET['user_id'];
 
@@ -29,8 +30,8 @@ if ($_SESSION['user_id'] != $user_id) {
     exit();
 }
 
-$stmt = mysqli_prepare($conn, "DELETE FROM review_court WHERE court_id = ? AND user_id = ?");
-mysqli_stmt_bind_param($stmt, "ii", $court_id, $user_id);
+$stmt = mysqli_prepare($conn, "DELETE FROM review_court WHERE review_court_id = ?");
+mysqli_stmt_bind_param($stmt, "i", $review_court_id);
 mysqli_stmt_execute($stmt);
 
 if (mysqli_affected_rows($conn) > 0) {
